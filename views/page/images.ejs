@@ -1,0 +1,167 @@
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        首页
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            我的企业
+        </small>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            图片管理
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="upload">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8">
+        <ul class="ace-thumbnails clearfix">
+            <li>
+                <div>
+                    <img alt="150x150" src="./assets/images/gallery/image-1.jpg">
+                    <div class="text">
+                        <div class="inner">
+                            <span>aaaaaaaaaaaaa</span>
+                            <br>
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil-square-o"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-arrow-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-4">
+        <h5>图片目录</h5>
+        <div class="space-4"></div>
+        <div id="tree1" class="tree">
+
+        </div>
+    </div>
+</div>
+<script>
+
+    jQuery(function($) {
+        var $overflow = '';
+        var colorbox_params = {
+            rel: 'colorbox',
+            reposition:true,
+            scalePhotos:true,
+            scrolling:false,
+            previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+            next:'<i class="ace-icon fa fa-arrow-right"></i>',
+            close:'&times;',
+            current:'{current} of {total}',
+            maxWidth:'100%',
+            maxHeight:'100%',
+            onOpen:function(){
+                $overflow = document.body.style.overflow;
+                document.body.style.overflow = 'hidden';
+            },
+            onClosed:function(){
+                document.body.style.overflow = $overflow;
+            },
+            onComplete:function(){
+                $.colorbox.resize();
+            }
+        };
+
+        $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+        $("#cboxLoadingGraphic").append("<i class='ace-icon fa fa-spinner orange'></i>");//let's add a custom loading icon
+
+        var ace_icon = ace.vars['icon'];
+        var tree_data_2 = {
+            'pictures' : {name: 'Pictures', type: 'folder', 'icon-class':'red'}	,
+            'music' : {name: 'Music', type: 'folder', 'icon-class':'orange'}	,
+            'video' : {name: 'Video', type: 'folder', 'icon-class':'blue'}	,
+            'documents' : {name: 'Documents', type: 'folder', 'icon-class':'green'}	,
+            'backup' : {name: 'Backup', type: 'folder'}	,
+            'readme' : {name: '<i class="'+ace_icon+' fa fa-file-text grey"></i> ReadMe.txt', type: 'item'},
+            'manual' : {name: '<i class="'+ace_icon+' fa fa-book blue"></i> Manual.html', type: 'item'}
+        }
+        tree_data_2['music']['additionalParameters'] = {
+            'children' : [
+                {name: '<i class="'+ace_icon+' fa fa-music blue"></i> song1.ogg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-music blue"></i> song2.ogg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-music blue"></i> song3.ogg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-music blue"></i> song4.ogg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-music blue"></i> song5.ogg', type: 'item'}
+            ]
+        }
+        tree_data_2['video']['additionalParameters'] = {
+            'children' : [
+                {name: '<i class="'+ace_icon+' fa fa-film blue"></i> movie1.avi', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-film blue"></i> movie2.avi', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-film blue"></i> movie3.avi', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-film blue"></i> movie4.avi', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-film blue"></i> movie5.avi', type: 'item'}
+            ]
+        }
+        tree_data_2['pictures']['additionalParameters'] = {
+            'children' : {
+                'wallpapers' : {name: 'Wallpapers', type: 'folder', 'icon-class':'pink'},
+                'camera' : {name: 'Camera', type: 'folder', 'icon-class':'pink'}
+            }
+        }
+        tree_data_2['pictures']['additionalParameters']['children']['wallpapers']['additionalParameters'] = {
+            'children' : [
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> wallpaper1.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> wallpaper2.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> wallpaper3.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> wallpaper4.jpg', type: 'item'}
+            ]
+        }
+        tree_data_2['pictures']['additionalParameters']['children']['camera']['additionalParameters'] = {
+            'children' : [
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> photo1.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> photo2.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> photo3.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> photo4.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> photo5.jpg', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-picture-o green"></i> photo6.jpg', type: 'item'}
+            ]
+        }
+
+
+        tree_data_2['documents']['additionalParameters'] = {
+            'children' : [
+                {name: '<i class="'+ace_icon+' fa fa-file-text red"></i> document1.pdf', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-file-text grey"></i> document2.doc', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-file-text grey"></i> document3.doc', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-file-text red"></i> document4.pdf', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-file-text grey"></i> document5.doc', type: 'item'}
+            ]
+        }
+
+        tree_data_2['backup']['additionalParameters'] = {
+            'children' : [
+                {name: '<i class="'+ace_icon+' fa fa-archive brown"></i> backup1.zip', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-archive brown"></i> backup2.zip', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-archive brown"></i> backup3.zip', type: 'item'},
+                {name: '<i class="'+ace_icon+' fa fa-archive brown"></i> backup4.zip', type: 'item'}
+            ]
+        }
+        var treeDataSource2 = new DataSourceTree({data: tree_data_2});
+
+        $('#tree1').ace_tree({
+            dataSource: treeDataSource2 ,
+            loadingHTML:'<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
+            'open-icon' : 'ace-icon fa fa-folder-open',
+            'close-icon' : 'ace-icon fa fa-folder',
+            'selectable' : false,
+            'selected-icon' : null,
+            'unselected-icon' : null
+        });
+    });
+</script>

@@ -1,0 +1,116 @@
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        首页
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            我的企业
+        </small>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            产品目录
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="ace-thumbnails clearfix">
+            <%products.forEach(function(p){%>
+            <li>
+                <div>
+                    <img alt="150x150" src="<%=p.images[0].url%>!gallery">
+                    <div class="text">
+                        <div class="inner">
+                            <span><%=p.name%></span>
+                            <br>
+                            <a href="#">
+                                <i class="ace-icon fa fa-pencil-square-o"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-arrow-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <%});%>
+        </ul>
+        <button class="btn btn-app btn-default no-radius" id="bootbox-product">
+            <i class="ace-icon fa fa-plus bigger-230"></i>
+            新增
+        </button>
+        <script id="productBox" type="text/template">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="name">产品名称</label>
+                            <div class="col-sm-9">
+                                <input id="name" name="name" type="text" placeholder="请输入产品名称" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="introduction">产品简介</label>
+                            <div class="col-sm-9">
+                                <input id="introduction" name="introduction" type="text" placeholder="请输入产品简介" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </script>
+        <script>
+            jQuery(function($) {
+                var $overflow = '';
+                var colorbox_params = {
+                    rel: 'colorbox',
+                    reposition:true,
+                    scalePhotos:true,
+                    scrolling:false,
+                    previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+                    next:'<i class="ace-icon fa fa-arrow-right"></i>',
+                    close:'&times;',
+                    current:'{current} of {total}',
+                    maxWidth:'100%',
+                    maxHeight:'100%',
+                    onOpen:function(){
+                        $overflow = document.body.style.overflow;
+                        document.body.style.overflow = 'hidden';
+                    },
+                    onClosed:function(){
+                        document.body.style.overflow = $overflow;
+                    },
+                    onComplete:function(){
+                        $.colorbox.resize();
+                    }
+                };
+
+                $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+                $("#cboxLoadingGraphic").append("<i class='ace-icon fa fa-spinner orange'></i>");//let's add a custom loading icon
+
+                $("#bootbox-product").on("click",function(){
+                    var productBox = $("#productBox").html();
+                    var html = ejs.render(productBox);
+                    bootbox.dialog({
+                                title: "新增产品",
+                                message: html,
+                                buttons: {
+                                    success: {
+                                        label: "Save",
+                                        className: "btn-success",
+                                        callback: function () {
+                                            var name = $('#name').val();
+                                            var answer = $("input[name='awesomeness']:checked").val()
+                                            Example.show("Hello " + name + ". You've chosen <b>" + answer + "</b>");
+                                        }
+                                    }
+                                }
+                            }
+                    );
+                });
+            });
+        </script>
+    </div><!-- /.col -->
+</div><!-- /.row -->

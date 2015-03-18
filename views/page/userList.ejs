@@ -1,0 +1,75 @@
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        首页
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            我的会员
+        </small>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            会员列表
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div>
+            <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>手机号</th>
+                    <th>用户名</th>
+                    <th class="hidden-480">邮箱</th>
+                    <th class="hidden-480">姓名</th>
+                    <th>
+                        <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                        创建日期
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <%customers.forEach(function(c){%>
+                    <tr>
+                        <td>
+                            <%=c.mobile?c.mobile:''%>
+                        </td>
+                        <td><%=c.loginName?c.loginName:''%></td>
+                        <td class="hidden-480"><%=c.email?c.email:''%></td>
+                        <td><%=c.name?c.name:''%></td>
+                        <td class="hidden-480">
+                            <%=new Date(c.createDate).Format("yyyy-MM-dd hh:mm:ss")%>
+                        </td>
+                        <td>
+                            <div class=action-buttons">
+                                <a class="blue" href="#">
+                                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                </a>
+                                <a class="green" href="#">
+                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                </a>
+                                <a class="red" href="#">
+                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <%});%>
+                </tbody>
+            </table>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<script>
+    jQuery(function($) {
+        var oTable1 = $('#sample-table-2').dataTable( {
+                            bAutoWidth: false,
+                            "aoColumns": [
+                                null, null,null, null, null, { "bSortable": false }
+                            ]
+                        } );
+    })
+</script>

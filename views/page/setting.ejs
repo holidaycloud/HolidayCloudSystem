@@ -1,0 +1,286 @@
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        首页
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            我的企业
+        </small>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            配置管理
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 widget-container-col">
+                <div class="widget-box widget-color-orange">
+                    <div class="widget-header widget-header-small">
+                        <h6 class="widget-title smaller">网站配置</h6>
+
+                        <div class="widget-toolbar no-border">
+                            <label>
+                                <input class="ace ace-switch ace-switch-6" type="checkbox" <%=web.isEnable?'checked="checked"':''%>>
+                                <span class="lbl middle"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <form class="form-horizontal" role="form">
+                                <!-- #section:elements.form -->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="entName">企业名称</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="entName" placeholder="企业名称" class="form-control" value="<%=web.title%>">
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="domain">企业网址</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="domain" placeholder="企业网址" class="form-control" value="<%=web.domain%>">
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="address">企业地址</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="address" placeholder="企业地址" class="form-control" value="<%=web.address%>">
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="tel">企业电话</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="tel" placeholder="企业电话" class="form-control" value="<%=web.tel%>">
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="email">企业邮箱</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="email" placeholder="企业邮箱" class="form-control" value="<%=web.email%>">
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">经纬度</label>
+
+                                    <div class="col-sm-10">
+											<input type="text" placeholder="纬度" id="lat"  value="<%=web.gps.lat%>">
+											<input type="text" placeholder="经度" id="lon"  value="<%=web.gps.lon%>">
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="logo">Logo</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="file" id="logo" class="form-control">
+                                        <div class="space-4"></div>
+                                        <ul class="ace-thumbnails clearfix">
+                                            <li>
+                                                <div>
+                                                    <img alt="150x150" src="<%=web.logo%>">
+                                                    <div class="text">
+                                                        <div class="inner">
+                                                            <span>logo</span>
+                                                            <br>
+                                                            <a href="#">
+                                                                <i class="ace-icon fa fa-pencil-square-o"></i>
+                                                            </a>
+
+                                                            <a href="#">
+                                                                <i class="ace-icon fa fa-arrow-down"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="qrcode">二维码</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="file" id="qrcode" class="form-control">
+                                        <div class="space-4"></div>
+                                        <ul class="ace-thumbnails clearfix">
+                                            <li>
+                                                <div>
+                                                    <img alt="150x150" src="<%=web.qrCode%>!gallery">
+                                                    <div class="text">
+                                                        <div class="inner">
+                                                            <span>qrcode</span>
+                                                            <br>
+                                                            <a href="#">
+                                                                <i class="ace-icon fa fa-pencil-square-o"></i>
+                                                            </a>
+
+                                                            <a href="#">
+                                                                <i class="ace-icon fa fa-arrow-down"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+                                <div class="clearfix form-actions">
+                                    <div class="center">
+                                        <button class="btn btn-info" type="button">
+                                            <i class="ace-icon fa fa-check bigger-110"></i>
+                                            保存
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 widget-container-col">
+                <div class="widget-box widget-color-green">
+                    <div class="widget-header widget-header-small">
+                        <h6 class="widget-title smaller">微信配置</h6>
+
+                        <div class="widget-toolbar no-border">
+                            <label>
+                                <input class="ace ace-switch ace-switch-6" type="checkbox" checked="checked">
+                                <span class="lbl middle"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <form class="form-horizontal" role="form">
+                                <h5 class="header blue bolder smaller">基础</h5>
+                                <div class="space-4"></div>
+                                <!-- #section:elements.form -->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="appID">appID</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="appID" placeholder="appID" class="form-control" value="<%=weixin.appID%>">
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="appsecret">appsecret</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="appsecret" placeholder="appsecret" class="form-control" value="<%=weixin.appsecret%>">
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="Token">Token</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="Token" placeholder="Token" class="form-control" value="<%=weixin.token%>">
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="url">URL(服务器地址)</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">email@example.com</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="warnurl">WARN_URL(告警通知地址)</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">email@example.com</p>
+                                    </div>
+                                </div>
+                                <h5 class="header blue bolder smaller">微信支付</h5>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="partnerId">partnerId</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="partnerId" placeholder="partnerId" class="form-control" value="<%=weixin.partnerId%>">
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="partnerKey">partnerKey</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" id="partnerKey" placeholder="partnerKey" class="form-control" value="<%=weixin.partnerKey%>">
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="authDir">支付授权目录</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">email@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="OAuth2Url">OAuth2.0网页授权</label>
+
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">email@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="space-4"></div>
+
+                                <div class="clearfix form-actions">
+                                    <div class="center">
+                                        <button class="btn btn-info" type="button">
+                                            <i class="ace-icon fa fa-check bigger-110"></i>
+                                            保存
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
