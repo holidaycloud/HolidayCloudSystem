@@ -1,0 +1,64 @@
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        首页
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            我的营销
+        </small>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            优惠券列表
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div>
+            <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>所属活动</th>
+                    <th>券名</th>
+                    <th>类型</th>
+                    <th>类型面值</th>
+                    <th>最低使用金额</th>
+                    <th>状态</th>
+                    <th>
+                        起止日期
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <%coupons.forEach(function(c){%>
+                <tr>
+                    <td>
+                        <%= c.marketing.name%>
+                    </td>
+                    <td><%= c.name%></td>
+                    <td><%= types[c.type]%></td>
+                    <th><%=c.value%></th>
+                    <th><%=c.minValue%></th>
+                    <th><%=c.status==0?'未使用':'已使用'%></th>
+                    <td>
+                        <%=new Date(c.startDate).Format("yyyy-MM-dd")+"至"+new Date(c.endDate).Format("yyyy-MM-dd")%>
+                    </td>
+                </tr>
+                <%});%>
+                </tbody>
+            </table>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<script>
+    jQuery(function($) {
+        var oTable1 = $('#sample-table-2').dataTable( {
+            bAutoWidth: false,
+            "aoColumns": [
+                null, null,null, null, null,null, { "bSortable": false }
+            ]
+        } );
+    })
+</script>

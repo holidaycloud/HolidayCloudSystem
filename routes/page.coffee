@@ -9,4 +9,5 @@ router.get "/images",AjaxAction.images
 router.get "/userList",AjaxAction.userList
 router.get "/setting",AjaxAction.setting
 router.get "/members",AjaxAction.members
+router.get "/couponList",AjaxAction.couponList
 module.exports = router

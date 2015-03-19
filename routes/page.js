@@ -22,6 +22,8 @@
 
   router.get("/members", AjaxAction.members);
 
+  router.get("/couponList", AjaxAction.couponList);
+
   module.exports = router;
 
 }).call(this);

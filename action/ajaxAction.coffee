@@ -2,6 +2,7 @@ ProductCtrl = require "./../ctrl/productCtrl"
 CustomerCtrl = require "./../ctrl/customerCtrl"
 SettingCtrl = require "./../ctrl/settingCtrl"
 MemberCtrl = require "./../ctrl/memberCtrl"
+CouponCtrl = require "./../ctrl/couponCtrl"
 async = require "async"
 exports.dashboard = (req,res) ->
   res.render "./page/dashboard"
@@ -47,5 +48,13 @@ exports.members = (req,res) ->
   MemberCtrl.fulllist req.session.member.ent._id,(err,results) ->
     if results.data?
       res.render "./page/members",{members:results.data}
+    else
+      res.status(500).end()
+
+exports.couponList = (req,res) ->
+  CouponCtrl.list req.session.member.ent._id,(err,results) ->
+    console.log JSON.stringify(results)
+    if results.data?
+      res.render "./page/couponList",coupons:results.data,types:[ "金额券","折扣券","产品固定价格","免费券"]
     else
       res.status(500).end()
