@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>我的优惠券</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/fav-144.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/fav-114.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/fav-72.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" href="images/fav-57.png">-->
+    <!--<link rel="shortcut icon" href="images/fav.png">-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="center-block">
+                <h3><%=coupon.name%></h3>
+                <img src="<%=url%>" class="img-responsive">
+                <h5>
+                    <%if(coupon.type==0){%>
+                    金额券&nbsp;&nbsp;价值<%=coupon.value%>元
+                    <%} else if(coupon.type==1){%>
+                    折扣券
+                    <%} else if(coupon.type==2){%>
+                    产品固定价格
+                    <%} else if(coupon.type==3){%>
+                    免费券
+                    <%}%>
+                    &nbsp;&nbsp;最低使用金额:<%=coupon.minValue%>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript Files -->
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

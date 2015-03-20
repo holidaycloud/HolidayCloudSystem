@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>我的优惠券</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/fav-144.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/fav-114.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/fav-72.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" href="images/fav-57.png">-->
+    <!--<link rel="shortcut icon" href="images/fav.png">-->
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <%if(result){%>
+                <h2 class="text-success">
+                    消费成功
+                </h2>
+                <h3 class="text-success">
+                    <%=new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss")%>
+                </h3>
+                <%} else { %>
+                <h2 class="text-danger">
+                    消费失败
+                </h2>
+                <h3 class="text-danger">
+                    <%=message%>
+                </h3>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- JavaScript Files -->
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

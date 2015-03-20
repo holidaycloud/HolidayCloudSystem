@@ -15,6 +15,11 @@ logger = log4js.getLogger "normal"
 
 index = require "./routes/index"
 page = require "./routes/page"
+
+#TODO 浏河临时活动
+weixin = require "./routes/weixin"
+#TODO 浏河临时活动
+
 app = express()
 
 app.set "views",path.join __dirname,"views"
@@ -36,6 +41,11 @@ app.use flash()
 
 app.use "/",index
 app.use "/page",page
+
+#TODO 浏河临时活动
+app.use "/weixin",weixin
+global.isDebug = true
+#TODO 浏河临时活动
 
 app.use (req,res,next) ->
   res.status(404).end()

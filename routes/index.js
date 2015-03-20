@@ -20,6 +20,17 @@
 
   router.get("/dologout", Action.dologout);
 
+
+  /*
+    TODO:浏河临时活动
+   */
+
+  router.get("/coupons", PageAction.coupons);
+
+  router.get("/couponDetail", PageAction.couponDetail);
+
+  router.get("/couponuse", PageAction.couponuse);
+
   module.exports = router;
 
 }).call(this);
