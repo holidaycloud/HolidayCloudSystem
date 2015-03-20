@@ -106,4 +106,5 @@ class CustomerCtrl
         catch error
           deferred.reject new Error("Parse Error")
     deferred.promise
+
 module.exports = CustomerCtrl

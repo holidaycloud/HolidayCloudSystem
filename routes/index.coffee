@@ -9,7 +9,6 @@ router.post "/dobind",Action.dobind
 router.post "/dologin",Action.dologin
 router.get "/dologout",Action.dologout
 
-
 ###
   TODO:浏河临时活动
 ###
