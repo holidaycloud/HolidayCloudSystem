@@ -24,6 +24,7 @@
     "compression":"*",
     "upyun":"*",
     "socket.io":"*",
-    "pg":"*"
+    "pg":"*",
+    "q":"*"
   }
 }

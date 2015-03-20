@@ -92,6 +92,38 @@
       });
     };
 
+    MemberCtrl.weixinBind = function(loginName, pwd, openid) {
+      var url;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/member/weixinBind";
+      return request({
+        url: url,
+        timeout: 3000,
+        method: "POST",
+        form: {
+          loginName: loginName,
+          pwd: pwd,
+          openid: openid
+        }
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return fn(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return fn(new Error(res.errMsg));
+            } else {
+              return fn(null, res);
+            }
+          } catch (_error) {
+            error = _error;
+            return fn(new Error("Parse Error"));
+          }
+        }
+      });
+    };
+
     return MemberCtrl;
 
   })();

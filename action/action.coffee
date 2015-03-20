@@ -12,8 +12,15 @@ exports.dologin = (req,res) ->
       req.flash "tokenExpires",results.data.expireDate
       res.redirect "/"
 
+exports.dobind = (req,res) ->
+  userName = req.body.userName
+  passwd = req.body.passwd
+  console.log(userName,passwd);
+  res.json {error:0,errMsg:"用户名或密码错误！"};
+
 exports.dologout = (req,res) ->
   res.clearCookie "token"
   res.clearCookie "tokenExpires"
   delete req.session.member
   res.redirect "/"
+#https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx56f37f15c380728b&redirect_uri=http%3A%2F%2Ftest.meitrip.net%2fcoupons&response_type=code&scope=snsapi_base&state=coupons#wechat_redirect

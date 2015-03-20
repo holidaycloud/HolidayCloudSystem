@@ -21,6 +21,17 @@
     });
   };
 
+  exports.dobind = function(req, res) {
+    var passwd, userName;
+    userName = req.body.userName;
+    passwd = req.body.passwd;
+    console.log(userName, passwd);
+    return res.json({
+      error: 0,
+      errMsg: "用户名或密码错误！"
+    });
+  };
+
   exports.dologout = function(req, res) {
     res.clearCookie("token");
     res.clearCookie("tokenExpires");

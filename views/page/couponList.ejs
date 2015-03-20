@@ -55,10 +55,19 @@
 <script>
     jQuery(function($) {
         var oTable1 = $('#sample-table-2').dataTable( {
-            bAutoWidth: false,
-            "aoColumns": [
-                null, null,null, null, null,null, { "bSortable": false }
-            ]
+            "autoWidth": true,
+            "language":{
+                "info":"从 _START_ 条 至 _END_ 条 共 _TOTAL_条",
+                "infoFiltered": "从共_MAX_条数据中筛选",
+                "infoEmpty": "从 0 条 至 0 条 共 0 条",
+                "zeroRecords":    "未找到数据",
+                "paginate":{
+                    "next":">",
+                    "previous":"<"
+                },
+                "lengthMenu":"查看 _MENU_ 条数据",
+                "search":"查询关键字:"
+            }
         } );
     })
 </script>
