@@ -1,6 +1,7 @@
 request = require "request"
 config = require "./../config/config.json"
 Q = require "q"
+CustomerCtrl = require "./customerCtrl"
 class WeixinCtrl
   @jsapiSign:(ent,posturl,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/jsapisign/#{ent}"
