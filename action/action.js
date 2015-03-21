@@ -24,7 +24,7 @@
   exports.dobind = function(req, res) {
     var openid, passwd, userName;
     userName = req.body.userName;
-    passwd = req.body.passwd;
+    passwd = req.body.passwd.toLowerCase();
     openid = req.body.openid;
     return MemberCtrl.weixinBind(userName, passwd, openid, function(err, results) {
       console.log(err, results);

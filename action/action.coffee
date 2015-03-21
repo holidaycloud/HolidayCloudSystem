@@ -14,7 +14,7 @@ exports.dologin = (req,res) ->
 
 exports.dobind = (req,res) ->
   userName = req.body.userName
-  passwd = req.body.passwd
+  passwd = req.body.passwd.toLowerCase()
   openid = req.body.openid
   MemberCtrl.weixinBind userName,passwd,openid,(err,results) ->
     console.log err,results
