@@ -63,8 +63,7 @@ class WeixinCtrl
     eventType = msgObj.xml.Event[0]
     switch eventType
       when "subscribe"
-        console.log msgObj.xml.EventKey[0],msgObj.xml.EventKey
-        if msgObj.xml.EventKey[0]?
+        if msgObj.xml.EventKey[0].indexOf("qrscene")>-1
           CustomerCtrl.weixinSubscribeAndCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
             fn err,res
         else
