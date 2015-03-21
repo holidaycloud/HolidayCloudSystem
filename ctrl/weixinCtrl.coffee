@@ -63,7 +63,8 @@ class WeixinCtrl
     eventType = msgObj.xml.Event[0]
     switch eventType
       when "subscribe"
-        if msgObj.xml.EventKey?
+        console.log msgObj.xml.EventKey[0]?
+        if msgObj.xml.EventKey[0]?
           CustomerCtrl.weixinSubscribeAndCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
             fn err,res
         else
