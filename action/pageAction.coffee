@@ -1,5 +1,6 @@
 MemberCtrl = require "./../ctrl/memberCtrl"
 WeixinCtrl = require "./../ctrl/weixinCtrl"
+Q = require "q"
 async = require "async"
 exports.index = (req,res) ->
   token = req.cookies.token or req.flash "token"
