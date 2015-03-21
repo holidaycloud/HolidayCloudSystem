@@ -12,7 +12,7 @@ exports.auth = (req,res,next) ->
         next()
       else
         console.log "-----------auth failed---------------"
-        res.render "login"
+        res.json {error:502}
   else
     console.log "-----------auth failed---------------"
-    res.render "login"
+    res.json {error:502}

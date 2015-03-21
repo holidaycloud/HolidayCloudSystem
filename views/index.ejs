@@ -508,6 +508,7 @@
             $.ajax({
                 url:"/page/"+target
             }).done(function(data){
+                console.log(data);
                 $(".page-content").html(data);
             });
         });

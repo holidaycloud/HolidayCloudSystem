@@ -18,12 +18,16 @@
           return next();
         } else {
           console.log("-----------auth failed---------------");
-          return res.render("login");
+          return res.json({
+            error: 502
+          });
         }
       });
     } else {
       console.log("-----------auth failed---------------");
-      return res.render("login");
+      return res.json({
+        error: 502
+      });
     }
   };
 
