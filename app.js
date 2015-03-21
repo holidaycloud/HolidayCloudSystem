@@ -100,7 +100,7 @@
     return res.status(err.status || 500).end();
   });
 
-  app.set("port", process.env.PORT || 8888);
+  app.set("port", process.env.PORT || 3333);
 
   server = app.listen(app.get("port"), function() {
     return console.log("Express server listening on port " + (server.address().port));
