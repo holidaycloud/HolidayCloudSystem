@@ -1,10 +1,11 @@
 MemberCtrl = require "./../ctrl/memberCtrl"
 WeixinCtrl = require "./../ctrl/weixinCtrl"
 Q = require "q"
-Canvas = require "canvas"
-QRCode = require "qrcode"
-fs = require "fs"
-Image = Canvas.Image
+QRCodeExtend = require "./../tools/qrcodeExtend"
+#Canvas = require "canvas"
+#QRCode = require "qrcode"
+#fs = require "fs"
+#Image = Canvas.Image
 config = require "./../config/config.json"
 request = require "request"
 async = require "async"
@@ -113,26 +114,31 @@ _createQrcode = (id) ->
   scala = 3
   logoSize = 0.2
   deferred = Q.defer()
-  QRCode.draw "http://test.meitrip.net/couponuse?id=#{id}",scala:4*scala,(error,canvas) ->
-    console.log "./public/assets/images/logo.png"
-    fs.readFile "./public/assets/images/logo.png",(err,squid) ->
-      deferred.reject err if err?
-      img = new Image
-      img.src = squid
-      ctx = canvas.getContext "2d"
-      w = canvas.width*logoSize
-      h = canvas.height*logoSize
-      x = (canvas.width/2) - (w/2)
-      y = (canvas.height/2) - (h/2)
-      ctx.drawImage img,x,y,w,h
-      deferred.resolve canvas.toDataURL()
+
+  QRCodeExtend.withLogoToDataURL "http://test.meitrip.net/couponuse?id=#{id}","./public/assets/images/logo.png",4,(err,results) ->
+    deferred.reject err if err?
+    deferred.resolve results
+  deferred.promise
+
+#  QRCode.draw "http://test.meitrip.net/couponuse?id=#{id}",scala:4*scala,(error,canvas) ->
+#    console.log "./public/assets/images/logo.png"
+#    fs.readFile "./public/assets/images/logo.png",(err,squid) ->
+#      deferred.reject err if err?
+#      img = new Image
+#      img.src = squid
+#      ctx = canvas.getContext "2d"
+#      w = canvas.width*logoSize
+#      h = canvas.height*logoSize
+#      x = (canvas.width/2) - (w/2)
+#      y = (canvas.height/2) - (h/2)
+#      ctx.drawImage img,x,y,w,h
+#      deferred.resolve canvas.toDataURL()
 
 #  QRCode.toDataURI "http://test.meitrip.net/couponuse?id=#{id}",(err,url) ->
 #    if err
 #      deferred.reject err
 #    else
 #      deferred.resolve url
-  deferred.promise
 
 _couponUse = (id) ->
   deferred = Q.defer()
