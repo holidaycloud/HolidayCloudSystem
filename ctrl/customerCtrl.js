@@ -83,13 +83,18 @@
       _this = this;
       return async.waterfall([
         function(cb) {
-          return _this.weixinSubscribe(openid, cb);
+          return _this.weixinSubscribe(openid, function(err, res) {
+            console.log(err, res);
+            return cb(err, res);
+          });
         }, function(cb) {
-          return _this.weixinCoupon(openid, from, scene.replace("qrscene_", ""), cb);
+          return _this.weixinCoupon(openid, from, scene.replace("qrscene_", ""), function(err, res) {
+            console.log(err, res);
+            return cb(err, res);
+          });
         }
       ], function(err, results) {
         var coupon;
-        console.log("weixinSubscribeAndCoupon", err, results);
         coupon = results[1];
         return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + from + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[news]]></MsgType>\n<ArticleCount>1</ArticleCount>\n<Articles>\n<item>\n<Title><![CDATA[您获得一张优惠券]]></Title>\n<Description><![CDATA[" + coupon.data.name + "]]></Description>\n<PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>\n<Url><![CDATA[http://test.meitrip.net/couponDetail?id=" + coupon.data._id + "]]></Url>\n</item>\n</Articles>\n</xml>");
       });

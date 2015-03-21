@@ -41,11 +41,14 @@ class CustomerCtrl
     _this = @
     async.waterfall([
       (cb) ->
-        _this.weixinSubscribe openid,cb
+        _this.weixinSubscribe openid,(err,res) ->
+          console.log err,res
+          cb err,res
       ,(cb) ->
-        _this.weixinCoupon openid,from,scene.replace("qrscene_",""),cb
+        _this.weixinCoupon openid,from,scene.replace("qrscene_",""),(err,res) ->
+          console.log err,res
+          cb err,res
     ],(err,results) ->
-      console.log "weixinSubscribeAndCoupon",err,results
       coupon = results[1]
       fn null,"""
                 <xml>
