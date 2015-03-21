@@ -45,10 +45,8 @@ class WeixinCtrl
         fn null,body
 
   @msg:(signature,timestamp,nonce,msg,fn) ->
-    console.log signature,timestamp,nonce,msg
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.weixinEnt}"
     request {url,timeout:3000,method:"POST",form: {signature,timestamp,nonce,msg}},(err,response,body) ->
-      console.log err,body
       if err
         fn err
       else

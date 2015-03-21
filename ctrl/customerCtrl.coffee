@@ -45,6 +45,7 @@ class CustomerCtrl
       ,(cb) ->
         _this.weixinCoupon openid,from,scene.replace("qrscene_",""),cb
     ],(err,results) ->
+      console.log "weixinSubscribeAndCoupon",err,results
       coupon = results[1]
       fn null,"""
                 <xml>

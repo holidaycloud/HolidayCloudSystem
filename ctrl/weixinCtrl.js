@@ -93,7 +93,6 @@
 
     WeixinCtrl.msg = function(signature, timestamp, nonce, msg, fn) {
       var url;
-      console.log(signature, timestamp, nonce, msg);
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.weixinEnt;
       return request({
         url: url,
@@ -107,7 +106,6 @@
         }
       }, function(err, response, body) {
         var error, res;
-        console.log(err, body);
         if (err) {
           return fn(err);
         } else {

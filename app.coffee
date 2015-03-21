@@ -65,6 +65,7 @@ server = app.listen (app.get "port"),() ->
   console.log "Express server listening on port #{server.address().port}"
 
 global.weixinEnt = "54124f09e07fa9341ba90cf3"
+global.isDebug = false
 #ws global object
 global.users = {};
 ws = require("socket.io")(server)
