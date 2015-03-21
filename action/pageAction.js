@@ -52,7 +52,7 @@
         });
       }
     ], function(err, results) {
-      console.log(err, results);
+      console.log(results[0].data.openid, results[0].data);
       return res.render("weixinBind", {
         weixin: results[1].data,
         openid: results[0].data.openid
