@@ -92,7 +92,7 @@
       });
     };
 
-    MemberCtrl.weixinBind = function(loginName, pwd, openid) {
+    MemberCtrl.weixinBind = function(loginName, pwd, openid, fn) {
       var url;
       url = "" + config.inf.host + ":" + config.inf.port + "/api/member/weixinBind";
       return request({

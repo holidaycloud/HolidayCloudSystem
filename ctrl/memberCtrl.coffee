@@ -47,7 +47,7 @@ class MemberCtrl
         catch error
           fn new Error("Parse Error")
 
-  @weixinBind:(loginName,pwd,openid) ->
+  @weixinBind:(loginName,pwd,openid,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/member/weixinBind"
     request {url,timeout:3000,method:"POST",form:{loginName,pwd,openid}},(err,response,body) ->
       if err

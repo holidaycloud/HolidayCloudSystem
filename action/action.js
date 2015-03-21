@@ -26,10 +26,12 @@
     userName = req.body.userName;
     passwd = req.body.passwd;
     openid = req.body.openid;
-    console.log(userName, passwd, openid);
-    return res.json({
-      error: 0,
-      errMsg: "用户名或密码错误！"
+    return MemberCtrl.weixinBind(userName, passwd, openid, function(err, res) {
+      console.log(err, res);
+      return res.json({
+        error: 0,
+        errMsg: "用户名或密码错误！"
+      });
     });
   };
 
