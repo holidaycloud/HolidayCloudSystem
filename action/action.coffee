@@ -18,7 +18,7 @@ exports.dobind = (req,res) ->
   openid = req.body.openid
   MemberCtrl.weixinBind userName,passwd,openid,(err,results) ->
     console.log err,results
-    res.json {error:0,errMsg:"用户名或密码错误！"}
+    res.json results
 
 exports.dologout = (req,res) ->
   res.clearCookie "token"
