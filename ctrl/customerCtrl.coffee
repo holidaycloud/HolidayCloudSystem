@@ -42,13 +42,12 @@ class CustomerCtrl
     async.series([
       (cb) ->
         _this.weixinSubscribe openid,(err,res) ->
-          console.log err,res
           cb err,res
       ,(cb) ->
         _this.weixinCoupon openid,from,scene.replace("qrscene_",""),(err,res) ->
-          console.log err,res
           cb err,res
     ],(err,results) ->
+      console.log "---------------------------------\n",err,results,"\n---------------------------------"
       coupon = results[1]
       fn null,"""
                 <xml>
