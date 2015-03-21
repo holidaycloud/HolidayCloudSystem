@@ -36,6 +36,9 @@
   };
 
   exports.bind = function(req, res) {
+    var code, state;
+    code = req.query.code;
+    state = req.query.state;
     return async.parallel([
       function(cb) {
         return WeixinCtrl.getOpenid(weixinEnt, code, function(err, results) {

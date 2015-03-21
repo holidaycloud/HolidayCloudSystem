@@ -20,6 +20,8 @@ exports.index = (req,res) ->
     res.render "login"
 
 exports.bind = (req,res) ->
+  code = req.query.code
+  state = req.query.state
   async.parallel [
     (cb) ->
       WeixinCtrl.getOpenid weixinEnt,code,(err,results) ->
