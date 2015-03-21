@@ -81,7 +81,7 @@
     CustomerCtrl.weixinSubscribeAndCoupon = function(openid, from, scene, fn) {
       var _this;
       _this = this;
-      return async.waterfall([
+      return async.series([
         function(cb) {
           return _this.weixinSubscribe(openid, function(err, res) {
             console.log(err, res);

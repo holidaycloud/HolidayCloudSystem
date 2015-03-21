@@ -39,7 +39,7 @@ class CustomerCtrl
 
   @weixinSubscribeAndCoupon:(openid,from,scene,fn) ->
     _this = @
-    async.waterfall([
+    async.series([
       (cb) ->
         _this.weixinSubscribe openid,(err,res) ->
           console.log err,res
