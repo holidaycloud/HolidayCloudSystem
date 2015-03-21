@@ -52,11 +52,10 @@
         });
       }
     ], function(err, results) {
-      var _ref, _ref1;
       console.log(err, results);
       return res.render("weixinBind", {
         weixin: results[1].data,
-        openid: (_ref = results[0]) != null ? (_ref1 = _ref.data) != null ? _ref1.openid : void 0 : void 0
+        openid: results[0].data.openid
       });
     });
   };
