@@ -47,28 +47,11 @@ class CustomerCtrl
         _this.weixinCoupon openid,from,scene.replace("qrscene_",""),(err,res) ->
           cb err,res
     ],(err,results) ->
-      console.log "---------------------------------\n",err,results,"\n---------------------------------"
-      coupon = results[1]
-      fn null,"""
-                <xml>
-                <ToUserName><![CDATA[#{openid}]]></ToUserName>
-                <FromUserName><![CDATA[#{from}]]></FromUserName>
-                <CreateTime>#{Date.now()}</CreateTime>
-                <MsgType><![CDATA[news]]></MsgType>
-                <ArticleCount>1</ArticleCount>
-                <Articles>
-                <item>
-                <Title><![CDATA[您获得一张优惠券]]></Title>
-                <Description><![CDATA[#{coupon.data.name}]]></Description>
-                <PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>
-                <Url><![CDATA[http://test.meitrip.net/couponDetail?id=#{coupon.data._id}]]></Url>
-                </item>
-                </Articles>
-                </xml>
-                """
+      fn null,results[1]
     )
 
   @weixinCoupon:(openid,from,sceneid,fn) ->
+    console.log openid,from,sceneid
     _getCustomerInfo openid
     .then(
       (customer) ->
@@ -81,6 +64,7 @@ class CustomerCtrl
       )
     .then(
       (coupon) ->
+        console.log coupon
         fn null,"""
                 <xml>
                 <ToUserName><![CDATA[#{openid}]]></ToUserName>
