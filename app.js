@@ -108,7 +108,7 @@
 
   global.weixinEnt = "54124f09e07fa9341ba90cf3";
 
-  global.isDebug = false;
+  global.isDebug = true;
 
   global.users = {};
 

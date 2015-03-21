@@ -51,7 +51,6 @@ class CustomerCtrl
     )
 
   @weixinCoupon:(openid,from,sceneid,fn) ->
-    console.log openid,from,sceneid
     _getCustomerInfo openid
     .then(
       (customer) ->
@@ -64,7 +63,6 @@ class CustomerCtrl
       )
     .then(
       (coupon) ->
-        console.log coupon
         fn null,"""
                 <xml>
                 <ToUserName><![CDATA[#{openid}]]></ToUserName>

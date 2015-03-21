@@ -129,7 +129,7 @@
       eventType = msgObj.xml.Event[0];
       switch (eventType) {
         case "subscribe":
-          console.log(msgObj.xml.EventKey[0] != null);
+          console.log(msgObj.xml.EventKey[0], msgObj.xml.EventKey);
           if (msgObj.xml.EventKey[0] != null) {
             return CustomerCtrl.weixinSubscribeAndCoupon(msgObj.xml.FromUserName[0], msgObj.xml.ToUserName[0], msgObj.xml.EventKey[0], function(err, res) {
               return fn(err, res);
