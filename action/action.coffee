@@ -17,8 +17,13 @@ exports.dobind = (req,res) ->
   passwd = req.body.passwd.toLowerCase()
   openid = req.body.openid
   MemberCtrl.weixinBind userName,passwd,openid,(err,results) ->
-    console.log err,results
-    res.json results
+    if err
+      res.json error:1,errMsg:err.message
+    else
+      if results.error is 1
+        res.json results
+      else
+        res.json error:0
 
 exports.dologout = (req,res) ->
   res.clearCookie "token"

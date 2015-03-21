@@ -27,8 +27,20 @@
     passwd = req.body.passwd.toLowerCase();
     openid = req.body.openid;
     return MemberCtrl.weixinBind(userName, passwd, openid, function(err, results) {
-      console.log(err, results);
-      return res.json(results);
+      if (err) {
+        return res.json({
+          error: 1,
+          errMsg: err.message
+        });
+      } else {
+        if (results.error === 1) {
+          return res.json(results);
+        } else {
+          return res.json({
+            error: 0
+          });
+        }
+      }
     });
   };
 
