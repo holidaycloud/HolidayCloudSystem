@@ -6,25 +6,21 @@
 
   exports.auth = function(req, res, next) {
     var token, tokenExpires;
-    console.log("-----------starting auth---------------");
     token = req.cookies.token || req.flash("token");
     tokenExpires = req.cookies.tokenExpires || req.flash("tokenExpires");
     if ((token != null) && tokenExpires > Date.now()) {
       req.session.flash = {};
       return MemberCtrl.memberInfo(token, function(err, results) {
         if (results.data != null) {
-          console.log("-----------auth success---------------");
           req.session.member = results.data.member;
           return next();
         } else {
-          console.log("-----------auth failed---------------");
           return res.json({
             error: 502
           });
         }
       });
     } else {
-      console.log("-----------auth failed---------------");
       return res.json({
         error: 502
       });
