@@ -16,8 +16,8 @@ exports.dobind = (req,res) ->
   userName = req.body.userName
   passwd = req.body.passwd
   openid = req.body.openid
-  MemberCtrl.weixinBind userName,passwd,openid,(err,res) ->
-    console.log err,res
+  MemberCtrl.weixinBind userName,passwd,openid,(err,results) ->
+    console.log err,results
     res.json {error:0,errMsg:"用户名或密码错误！"}
 
 exports.dologout = (req,res) ->

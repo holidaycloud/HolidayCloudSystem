@@ -26,8 +26,8 @@
     userName = req.body.userName;
     passwd = req.body.passwd;
     openid = req.body.openid;
-    return MemberCtrl.weixinBind(userName, passwd, openid, function(err, res) {
-      console.log(err, res);
+    return MemberCtrl.weixinBind(userName, passwd, openid, function(err, results) {
+      console.log(err, results);
       return res.json({
         error: 0,
         errMsg: "用户名或密码错误！"
