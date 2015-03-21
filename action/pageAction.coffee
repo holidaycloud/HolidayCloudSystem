@@ -22,9 +22,8 @@ exports.index = (req,res) ->
 exports.bind = (req,res) ->
   async.parallel [
     (cb) ->
-#      WeixinCtrl.getOpenid weixinEnt,code,(err,results) ->
-#        cb err,results
-        cb null,"123123123123123"
+      WeixinCtrl.getOpenid weixinEnt,code,(err,results) ->
+        cb err,results
     ,(cb) ->
       url = "http://#{req.hostname}#{req.url}"
       WeixinCtrl.jsapiSign weixinEnt,url,(err,results) ->

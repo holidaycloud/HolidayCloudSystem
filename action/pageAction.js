@@ -38,7 +38,9 @@
   exports.bind = function(req, res) {
     return async.parallel([
       function(cb) {
-        return cb(null, "123123123123123");
+        return WeixinCtrl.getOpenid(weixinEnt, code, function(err, results) {
+          return cb(err, results);
+        });
       }, function(cb) {
         var url;
         url = "http://" + req.hostname + req.url;
