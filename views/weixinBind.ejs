@@ -207,7 +207,8 @@
                 method:"POST",
                 data:{
                     userName:$("#userName").val(),
-                    passwd:$("#passwd").val()
+                    passwd:$("#passwd").val(),
+                    openid:$("#openid").val()
                 }
             }).done(function(data){
                 if(data.error==1){
