@@ -63,7 +63,7 @@
   _getOpenid = function(code) {
     var deferred, url;
     deferred = Q.defer();
-    url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/codeAccesstoken/" + global.ent + "?code=" + code;
+    url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/codeAccesstoken/" + global.weixinEnt + "?code=" + code;
     request({
       url: url,
       timeout: 3000,
@@ -92,7 +92,7 @@
   _getCustomerInfo = function(openid) {
     var deferred, url;
     deferred = Q.defer();
-    url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.ent + "&openId=" + openid;
+    url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.weixinEnt + "&openId=" + openid;
     request({
       url: url,
       timeout: 3000,
@@ -121,7 +121,7 @@
   _getCoupons = function(customer) {
     var deferred, url;
     deferred = Q.defer();
-    url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/customerCoupons?ent=" + global.ent + "&customer=" + customer + "&status=0";
+    url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/customerCoupons?ent=" + global.weixinEnt + "&customer=" + customer + "&status=0";
     request({
       url: url,
       timeout: 3000,

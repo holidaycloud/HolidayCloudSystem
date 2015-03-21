@@ -39,7 +39,7 @@ exports.bind = (req,res) ->
 #private method
 _getOpenid = (code) ->
   deferred = Q.defer()
-  url = "#{config.weixin.host}:#{config.weixin.port}/weixin/codeAccesstoken/#{global.ent}?code=#{code}"
+  url = "#{config.weixin.host}:#{config.weixin.port}/weixin/codeAccesstoken/#{global.weixinEnt}?code=#{code}"
   request {url,timeout:3000,method:"GET"},(err,response,body) ->
     if err
       deferred.reject err
@@ -56,7 +56,7 @@ _getOpenid = (code) ->
 
 _getCustomerInfo = (openid) ->
   deferred = Q.defer()
-  url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinLogin?ent=#{global.ent}&openId=#{openid}"
+  url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinLogin?ent=#{global.weixinEnt}&openId=#{openid}"
   request {url,timeout:3000,method:"GET"},(err,response,body) ->
     if err
       deferred.reject err
@@ -73,7 +73,7 @@ _getCustomerInfo = (openid) ->
 
 _getCoupons = (customer) ->
   deferred = Q.defer()
-  url = "#{config.inf.host}:#{config.inf.port}/api/coupon/customerCoupons?ent=#{global.ent}&customer=#{customer}&status=0"
+  url = "#{config.inf.host}:#{config.inf.port}/api/coupon/customerCoupons?ent=#{global.weixinEnt}&customer=#{customer}&status=0"
   request {url,timeout:3000,method:"GET"},(err,response,body) ->
     if err
       deferred.reject err
