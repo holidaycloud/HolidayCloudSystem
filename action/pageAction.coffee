@@ -32,7 +32,7 @@ exports.bind = (req,res) ->
         cb err,results
   ]
   ,(err,results) ->
-    res.render "weixinBind",weixin:results[1].data,openid:results[0]?.data?.openid
+    res.render "weixinBind",weixin:results[1].data,openid:results[0].data?.openid
 
 ###
   TODO:浏河临时活动
