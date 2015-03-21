@@ -75,7 +75,7 @@
 
     WeixinCtrl.check = function(signature, timestamp, nonce, echostr, fn) {
       var url;
-      url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.ent + "?signature=" + signature + "&timestamp=" + timestamp + "&nonce=" + nonce + "&echostr=" + echostr;
+      url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.weixinEnt + "?signature=" + signature + "&timestamp=" + timestamp + "&nonce=" + nonce + "&echostr=" + echostr;
       return request({
         url: url,
         timeout: 3000,
@@ -92,7 +92,7 @@
     WeixinCtrl.msg = function(signature, timestamp, nonce, msg, fn) {
       var url;
       console.log(signature, timestamp, nonce, msg);
-      url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.ent;
+      url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.weixinEnt;
       return request({
         url: url,
         timeout: 3000,

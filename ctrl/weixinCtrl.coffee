@@ -36,7 +36,7 @@ class WeixinCtrl
     TODO:浏河临时活动
   ###
   @check:(signature,timestamp,nonce,echostr,fn) ->
-    url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}?signature=#{signature}&timestamp=#{timestamp}&nonce=#{nonce}&echostr=#{echostr}"
+    url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.weixinEnt}?signature=#{signature}&timestamp=#{timestamp}&nonce=#{nonce}&echostr=#{echostr}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->
       if err
         fn err
@@ -45,7 +45,7 @@ class WeixinCtrl
 
   @msg:(signature,timestamp,nonce,msg,fn) ->
     console.log signature,timestamp,nonce,msg
-    url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
+    url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.weixinEnt}"
     request {url,timeout:3000,method:"POST",form: {signature,timestamp,nonce,msg}},(err,response,body) ->
       console.log err,body
       if err
