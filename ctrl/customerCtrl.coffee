@@ -1,5 +1,6 @@
 request = require "request"
 config = require "./../config/config.json"
+async = require "async"
 Q = require "q"
 class CustomerCtrl
   @list:(ent,fn) ->
@@ -35,6 +36,33 @@ class CustomerCtrl
             fn null,res
         catch error
           fn new Error("Parse Error")
+
+  @weixinSubscribeAndCoupon:(openid,from,scene,fn) ->
+    async.waterfall([
+      (cb) ->
+        @weixinSubscribe openid,cb
+      ,(cb) ->
+        @weixinCoupon openid,from,scene.replace("qrscene_",""),cb
+    ],(err,results) ->
+      coupon = results[1]
+      fn null,"""
+                <xml>
+                <ToUserName><![CDATA[#{openid}]]></ToUserName>
+                <FromUserName><![CDATA[#{from}]]></FromUserName>
+                <CreateTime>#{Date.now()}</CreateTime>
+                <MsgType><![CDATA[news]]></MsgType>
+                <ArticleCount>1</ArticleCount>
+                <Articles>
+                <item>
+                <Title><![CDATA[您获得一张优惠券]]></Title>
+                <Description><![CDATA[#{coupon.data.name}]]></Description>
+                <PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>
+                <Url><![CDATA[http://test.meitrip.net/couponDetail?id=#{coupon.data._id}]]></Url>
+                </item>
+                </Articles>
+                </xml>
+                """
+    )
 
   @weixinCoupon:(openid,from,sceneid,fn) ->
     _getCustomerInfo openid

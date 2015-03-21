@@ -64,8 +64,13 @@ class WeixinCtrl
   @event:(msgObj,fn) ->
     eventType = msgObj.xml.Event[0]
     switch eventType
-      when "subscribe" then CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
-        fn err,res
+      when "subscribe"
+        if msgObj.xml.EventKey?
+          CustomerCtrl.weixinSubscribeAndCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
+            fn err,res
+        else
+          CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
+            fn err,res
       when "SCAN" then CustomerCtrl.weixinCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
         if err
           fn null,"""

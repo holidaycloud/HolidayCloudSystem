@@ -131,9 +131,16 @@
       eventType = msgObj.xml.Event[0];
       switch (eventType) {
         case "subscribe":
-          return CustomerCtrl.weixinSubscribe(msgObj.xml.FromUserName[0], function(err, res) {
-            return fn(err, res);
-          });
+          if (msgObj.xml.EventKey != null) {
+            return CustomerCtrl.weixinSubscribeAndCoupon(msgObj.xml.FromUserName[0], msgObj.xml.ToUserName[0], msgObj.xml.EventKey[0], function(err, res) {
+              return fn(err, res);
+            });
+          } else {
+            return CustomerCtrl.weixinSubscribe(msgObj.xml.FromUserName[0], function(err, res) {
+              return fn(err, res);
+            });
+          }
+          break;
         case "SCAN":
           return CustomerCtrl.weixinCoupon(msgObj.xml.FromUserName[0], msgObj.xml.ToUserName[0], msgObj.xml.EventKey[0], function(err, res) {
             if (err) {
