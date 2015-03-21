@@ -79,11 +79,13 @@
     };
 
     CustomerCtrl.weixinSubscribeAndCoupon = function(openid, from, scene, fn) {
+      var _this;
+      _this = this;
       return async.waterfall([
         function(cb) {
-          return this.weixinSubscribe(openid, cb);
+          return _this.weixinSubscribe(openid, cb);
         }, function(cb) {
-          return this.weixinCoupon(openid, from, scene.replace("qrscene_", ""), cb);
+          return _this.weixinCoupon(openid, from, scene.replace("qrscene_", ""), cb);
         }
       ], function(err, results) {
         var coupon;

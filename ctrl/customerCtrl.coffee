@@ -38,11 +38,12 @@ class CustomerCtrl
           fn new Error("Parse Error")
 
   @weixinSubscribeAndCoupon:(openid,from,scene,fn) ->
+    _this = @
     async.waterfall([
       (cb) ->
-        @weixinSubscribe openid,cb
+        _this.weixinSubscribe openid,cb
       ,(cb) ->
-        @weixinCoupon openid,from,scene.replace("qrscene_",""),cb
+        _this.weixinCoupon openid,from,scene.replace("qrscene_",""),cb
     ],(err,results) ->
       coupon = results[1]
       fn null,"""
