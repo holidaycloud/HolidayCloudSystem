@@ -53,7 +53,7 @@
         timeout: 3000,
         method: "POST",
         form: {
-          ent: global.ent,
+          ent: global.weixinEnt,
           openid: openid
         }
       }, function(err, response, body) {
@@ -97,7 +97,7 @@
     _getCustomerInfo = function(openid) {
       var deferred, url;
       deferred = Q.defer();
-      url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.ent + "&openId=" + openid;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.weixinEnt + "&openId=" + openid;
       request({
         url: url,
         timeout: 3000,
@@ -132,7 +132,7 @@
         timeout: 3000,
         method: "POST",
         form: {
-          ent: global.ent,
+          ent: global.weixinEnt,
           customer: customer,
           marketing: marketing
         }

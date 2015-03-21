@@ -23,7 +23,7 @@ class CustomerCtrl
   #public static method
   @weixinSubscribe:(openid,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinSubscribe"
-    request {url,timeout:3000,method:"POST",form: {ent:global.ent,openid}},(err,response,body) ->
+    request {url,timeout:3000,method:"POST",form: {ent:global.weixinEnt,openid}},(err,response,body) ->
       if err
         fn err
       else
@@ -75,7 +75,7 @@ class CustomerCtrl
   #private method
   _getCustomerInfo = (openid) ->
     deferred = Q.defer()
-    url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinLogin?ent=#{global.ent}&openId=#{openid}"
+    url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinLogin?ent=#{global.weixinEnt}&openId=#{openid}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->
       if err
         deferred.reject err
@@ -93,7 +93,7 @@ class CustomerCtrl
   _getCoupon = (customer,marketing) ->
     deferred = Q.defer()
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/give"
-    request {url,timeout:3000,method:"POST",form:{ent:global.ent,customer,marketing}},(err,response,body) ->
+    request {url,timeout:3000,method:"POST",form:{ent:global.weixinEnt,customer,marketing}},(err,response,body) ->
       if err
         deferred.reject err
       else
