@@ -22,10 +22,11 @@
   };
 
   exports.dobind = function(req, res) {
-    var passwd, userName;
+    var openid, passwd, userName;
     userName = req.body.userName;
     passwd = req.body.passwd;
-    console.log(userName, passwd);
+    openid = req.body.openid;
+    console.log(userName, passwd, openid);
     return res.json({
       error: 0,
       errMsg: "用户名或密码错误！"

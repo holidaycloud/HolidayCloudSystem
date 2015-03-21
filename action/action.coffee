@@ -15,8 +15,9 @@ exports.dologin = (req,res) ->
 exports.dobind = (req,res) ->
   userName = req.body.userName
   passwd = req.body.passwd
-  console.log(userName,passwd);
-  res.json {error:0,errMsg:"用户名或密码错误！"};
+  openid = req.body.openid
+  console.log userName,passwd,openid
+  res.json {error:0,errMsg:"用户名或密码错误！"}
 
 exports.dologout = (req,res) ->
   res.clearCookie "token"
