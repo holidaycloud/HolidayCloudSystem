@@ -2,6 +2,7 @@ MemberCtrl = require "./../ctrl/memberCtrl"
 WeixinCtrl = require "./../ctrl/weixinCtrl"
 Q = require "q"
 config = require "./../config/config.json"
+request = require "request"
 async = require "async"
 exports.index = (req,res) ->
   token = req.cookies.token or req.flash "token"
