@@ -52,6 +52,11 @@ exports.members = (req,res) ->
       res.status(500).end()
 
 exports.couponList = (req,res) ->
+  console.log """
+                --------------------------
+                #{req.session.member}
+                --------------------------
+               """
   CouponCtrl.list req.session.member.ent._id,(err,results) ->
     console.log JSON.stringify(results)
     if results.data?

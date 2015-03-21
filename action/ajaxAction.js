@@ -88,6 +88,7 @@
   };
 
   exports.couponList = function(req, res) {
+    console.log("--------------------------\n" + req.session.member + "\n--------------------------");
     return CouponCtrl.list(req.session.member.ent._id, function(err, results) {
       console.log(JSON.stringify(results));
       if (results.data != null) {
