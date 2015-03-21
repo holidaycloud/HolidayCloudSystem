@@ -125,7 +125,7 @@ _createQrcode = (id) ->
       x = (canvas.width/2) - (w/2)
       y = (canvas.height/2) - (h/2)
       ctx.drawImage img,x,y,w,h
-      deferred.resolve canvas.toDataURI()
+      deferred.resolve canvas.toDataURL()
 
 #  QRCode.toDataURI "http://test.meitrip.net/couponuse?id=#{id}",(err,url) ->
 #    if err

@@ -211,7 +211,7 @@
         x = (canvas.width / 2) - (w / 2);
         y = (canvas.height / 2) - (h / 2);
         ctx.drawImage(img, x, y, w, h);
-        return deferred.resolve(canvas.toDataURI());
+        return deferred.resolve(canvas.toDataURL());
       });
     });
     return deferred.promise;
