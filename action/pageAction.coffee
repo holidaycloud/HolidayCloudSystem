@@ -114,8 +114,8 @@ _createQrcode = (id) ->
   logoSize = 0.2
   deferred = Q.defer()
   QRCode.draw "http://test.meitrip.net/couponuse?id=#{id}",scala:4*scala,(error,canvas) ->
-    console.log "#{__dirname}/public/assets/images/logo.png"
-    fs.readFile "#{__dirname}/public/assets/images/logo.png",(err,squid) ->
+    console.log "./public/assets/images/logo.png"
+    fs.readFile "./public/assets/images/logo.png",(err,squid) ->
       deferred.reject err if err?
       img = new Image
       img.src = squid

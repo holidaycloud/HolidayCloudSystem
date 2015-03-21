@@ -197,8 +197,8 @@
     QRCode.draw("http://test.meitrip.net/couponuse?id=" + id, {
       scala: 4 * scala
     }, function(error, canvas) {
-      console.log("" + __dirname + "/public/assets/images/logo.png");
-      return fs.readFile("" + __dirname + "/public/assets/images/logo.png", function(err, squid) {
+      console.log("./public/assets/images/logo.png");
+      return fs.readFile("./public/assets/images/logo.png", function(err, squid) {
         var ctx, h, img, w, x, y;
         if (err != null) {
           deferred.reject(err);
