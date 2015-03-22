@@ -188,7 +188,7 @@
     scala = 3;
     logoSize = 0.2;
     deferred = Q.defer();
-    QRCodeExtend.withLogoToDataURL("http://test.meitrip.net/couponuse?id=" + id, "./public/assets/images/logo.png", 4, function(err, results) {
+    QRCodeExtend.withLogoToDataURL(id, "./public/assets/images/logo.png", 4, function(err, results) {
       if (err != null) {
         deferred.reject(err);
       }
