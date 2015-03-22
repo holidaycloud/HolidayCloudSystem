@@ -1,11 +1,7 @@
 MemberCtrl = require "./../ctrl/memberCtrl"
 WeixinCtrl = require "./../ctrl/weixinCtrl"
 Q = require "q"
-QRCodeExtend = require "./../tools/qrcodeExtend"
-#Canvas = require "canvas"
-#QRCode = require "qrcode"
-#fs = require "fs"
-#Image = Canvas.Image
+#QRCodeExtend = require "./../tools/qrcodeExtend"
 config = require "./../config/config.json"
 request = require "request"
 async = require "async"
