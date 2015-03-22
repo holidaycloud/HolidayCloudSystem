@@ -68,20 +68,22 @@
 </div>
 
 <!-- /section:basics/navbar.layout -->
-<div class="main-container" id="main-container">
+<div class="main-container" id="main-container" style="padding-top: ">
     <!-- /section:basics/sidebar.horizontal -->
     <div class="main-content">
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
-                    <ul class="list-unstyled spaced">
-                        <%coupons.forEach(function(c){%>
-                        <li>
-                            <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
-                            <%=c.name%>
-                        </li>
-                        <%})%>
-                    </ul>
+                    <%coupons.forEach(function(c){%>
+                    <div class="alert alert-success">
+                        <p>
+                            <strong>
+                                <%=c.name%>
+                            </strong>
+
+                        </p>
+                    </div>
+                    <%})%>
                 </div>
             </div>
         </div><!-- /.page-content -->
