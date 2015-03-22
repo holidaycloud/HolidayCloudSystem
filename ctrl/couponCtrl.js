@@ -68,7 +68,7 @@
                 } else {
                   try {
                     res = JSON.parse(body);
-                    if ((res.error != null) === 1) {
+                    if (res.error === 1) {
                       return cb(new Error(res.errMsg));
                     } else {
                       return cb(null, res);

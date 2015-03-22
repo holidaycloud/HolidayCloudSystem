@@ -35,7 +35,7 @@ class CouponCtrl
             else
               try
                 res = JSON.parse(body)
-                if res.error? is 1
+                if res.error is 1
                   cb new Error(res.errMsg)
                 else
                   cb null,res
