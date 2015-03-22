@@ -44,6 +44,7 @@
       return async.auto({
         getMember: function(cb) {
           return MemberCtrl.weixinLogin(openid, function(err, res) {
+            console.log(openid, err, res);
             return cb(err, res);
           });
         },
