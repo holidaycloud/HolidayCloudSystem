@@ -102,7 +102,7 @@ class WeixinCtrl
                     <FromUserName><![CDATA[#{msgObj.xml.ToUserName[0]}]]></FromUserName>
                     <CreateTime>#{Date.now()}</CreateTime>
                     <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA[优惠券#{res.data.code}使用成功。使用时间:#{new Date(res.data.useTime).Format("yyyy-MM-dd hh:mm:ss")}]></Content>
+                    <Content><![CDATA[优惠券:#{res.data.code}使用成功。\n使用时间:#{new Date(res.data.useTime).Format("yyyy-MM-dd hh:mm:ss")}]]></Content>
                     </xml>
                     """
       else
