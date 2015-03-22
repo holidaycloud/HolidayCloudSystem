@@ -2,6 +2,7 @@ request = require "request"
 config = require "./../config/config.json"
 Q = require "q"
 CustomerCtrl = require "./customerCtrl"
+CouponCtrl = require "./couponCtrl"
 class WeixinCtrl
   @jsapiSign:(ent,posturl,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/jsapisign/#{ent}"
@@ -82,6 +83,28 @@ class WeixinCtrl
                     """
         else
           fn null,res
+      when "scancode_waitmsg" then CouponCtrl.use msgObj.xml.ScanCodeInfo[0],msgObj.xml.FromUserName[0],(err,res) ->
+        console.log err,res
+        if err
+          fn null,"""
+                    <xml>
+                    <ToUserName><![CDATA[#{msgObj.xml.FromUserName[0]}]]></ToUserName>
+                    <FromUserName><![CDATA[#{msgObj.xml.ToUserName[0]}]]></FromUserName>
+                    <CreateTime>#{Date.now()}</CreateTime>
+                    <MsgType><![CDATA[text]]></MsgType>
+                    <Content><![CDATA[#{err.message}]]></Content>
+                    </xml>
+                    """
+        else
+          fn null,"""
+                    <xml>
+                    <ToUserName><![CDATA[#{msgObj.xml.FromUserName[0]}]]></ToUserName>
+                    <FromUserName><![CDATA[#{msgObj.xml.ToUserName[0]}]]></FromUserName>
+                    <CreateTime>#{Date.now()}</CreateTime>
+                    <MsgType><![CDATA[text]]></MsgType>
+                    <Content><![CDATA[优惠券#{res.data.code}使用成功。使用时间:#{new Date(res.data.useTime).Format("yyyy-MM-dd hh:mm:ss")}]></Content>
+                    </xml>
+                    """
       else
         fn null,""
 
