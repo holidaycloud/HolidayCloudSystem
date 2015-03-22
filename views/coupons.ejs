@@ -74,12 +74,14 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
-                    <dl id="dt-list-1">
+                    <ul class="list-unstyled spaced">
                         <%coupons.forEach(function(c){%>
-                        <dt><%=c.name%></dt>
-                        <dd><%=c.name%></dd>
+                        <li>
+                            <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                            <%=c.name%>
+                        </li>
                         <%})%>
-                    </dl>
+                    </ul>
                 </div>
             </div>
         </div><!-- /.page-content -->
