@@ -40,6 +40,33 @@
       });
     };
 
+    CouponCtrl.ajaxList = function(ent, start, length, order, dir, search, fn) {
+      var url;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/customlist?ent=" + ent + "&start=" + start + "&length=" + length + "&order=" + order + "&dir=" + dir + "&search=" + search;
+      return request({
+        url: url,
+        timeout: 3000,
+        method: "GET"
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return fn(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return fn(new Error(res.errMsg));
+            } else {
+              return fn(null, res);
+            }
+          } catch (_error) {
+            error = _error;
+            return fn(new Error("Parse Error"));
+          }
+        }
+      });
+    };
+
     CouponCtrl.use = function(id, openid, fn) {
       console.log(id);
       return async.auto({

@@ -26,6 +26,8 @@
 
   router.get("/couponList", AuthAction.auth, AjaxAction.couponList);
 
+  router.post("/couponList", AuthAction.auth, AjaxAction.couponAjaxList);
+
   module.exports = router;
 
 }).call(this);

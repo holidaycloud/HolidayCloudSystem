@@ -19,6 +19,21 @@ class CouponCtrl
         catch error
           fn new Error("Parse Error")
 
+  @ajaxList:(ent,start,length,order,dir,search,fn) ->
+    url = "#{config.inf.host}:#{config.inf.port}/api/coupon/customlist?ent=#{ent}&start=#{start}&length=#{length}&order=#{order}&dir=#{dir}&search=#{search}"
+    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+      if err
+        fn err
+      else
+        try
+          res = JSON.parse(body)
+          if res.error? is 1
+            fn new Error(res.errMsg)
+          else
+            fn null,res
+        catch error
+          fn new Error("Parse Error")
+
   @use:(id,openid,fn) ->
     console.log id
     async.auto {

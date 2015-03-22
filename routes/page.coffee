@@ -11,4 +11,5 @@ router.get "/userList",AuthAction.auth,AjaxAction.userList
 router.get "/setting",AuthAction.auth,AjaxAction.setting
 router.get "/members",AuthAction.auth,AjaxAction.members
 router.get "/couponList",AuthAction.auth,AjaxAction.couponList
+router.post "/couponList",AuthAction.auth,AjaxAction.couponAjaxList
 module.exports = router

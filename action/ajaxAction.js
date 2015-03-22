@@ -100,4 +100,34 @@
     });
   };
 
+  exports.couponAjaxList = function(req, res) {
+    var dir, draw, length, order, orderArr, search, start, statusArr, types;
+    orderArr = ["code", "ent", "name", "type", "value", "minValue", "status", "startDate"];
+    types = ["金额券", "折扣券", "定价券", "免费券"];
+    statusArr = ["未使用", "已使用"];
+    draw = req.body.draw;
+    start = req.body.start;
+    length = req.body.length;
+    order = orderArr[parseInt(req.body.order[0].column)];
+    dir = req.body.order[0].dir;
+    search = req.body.search.value;
+    return CouponCtrl.ajaxList(req.session.member.ent._id, start, length, order, dir, search, function(err, results) {
+      var c, coupons, _i, _len;
+      coupons = results.data.coupons;
+      for (_i = 0, _len = coupons.length; _i < _len; _i++) {
+        c = coupons[_i];
+        c.type = types[c.type];
+        c.status = statusArr[c.status];
+        c.startDate = "" + (new Date(c.startDate).Format("yyyy-MM-dd")) + "至" + (new Date(c.endDate).Format("yyyy-MM-dd"));
+        delete c.endDate;
+      }
+      return res.json({
+        draw: draw,
+        recordsTotal: results.data.totalSize,
+        recordsFiltered: results.data.totalSize,
+        data: coupons
+      });
+    });
+  };
+
 }).call(this);
