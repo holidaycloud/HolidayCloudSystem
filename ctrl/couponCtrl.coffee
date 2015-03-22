@@ -23,7 +23,6 @@ class CouponCtrl
     async.auto {
       getMember:(cb) ->
         MemberCtrl.weixinLogin openid,(err,res) ->
-
           cb err,res
       couponUse:(cb,results) ->
         member = results.getMember?.data
