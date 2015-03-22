@@ -44,13 +44,13 @@
       return async.auto({
         getMember: function(cb) {
           return MemberCtrl.weixinLogin(openid, function(err, res) {
-            console.log(openid, err, res);
             return cb(err, res);
           });
         },
         couponUse: function(cb, results) {
           var member, url, _ref;
           member = (_ref = results.getMember) != null ? _ref.data : void 0;
+          console.log(member);
           if (member != null) {
             url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/scanUse";
             return request({

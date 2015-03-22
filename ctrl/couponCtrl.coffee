@@ -23,10 +23,11 @@ class CouponCtrl
     async.auto {
       getMember:(cb) ->
         MemberCtrl.weixinLogin openid,(err,res) ->
-          console.log openid,err,res
+
           cb err,res
       couponUse:(cb,results) ->
         member = results.getMember?.data
+        console.log member
         if member?
           url = "#{config.inf.host}:#{config.inf.port}/api/coupon/scanUse"
           request {url,timeout:3000,method:"GET"},(err,response,body) ->
