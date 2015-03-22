@@ -68,7 +68,7 @@
 </div>
 
 <!-- /section:basics/navbar.layout -->
-<div class="main-container" id="main-container" style="padding-top: ">
+<div class="main-container" id="main-container">
     <!-- /section:basics/sidebar.horizontal -->
     <div class="main-content">
         <div class="page-content">
@@ -76,12 +76,8 @@
                 <div class="col-xs-12">
                     <%coupons.forEach(function(c){%>
                     <div class="alert alert-success">
-                        <a href="/couponDetail?id=<%=c._id%>">
-                            <p>
-                                <strong>
-                                    <%=c.name%>
-                                </strong>
-                            </p>
+                        <a href="/couponDetail?id=<%=c._id%>" class="btn btn-link">
+                            <h3><%=c.name%></h3>
                             <p>
                                 <%if(c.type==0){%>
                                 金额券&nbsp;&nbsp;价值<%=c.value%>元
