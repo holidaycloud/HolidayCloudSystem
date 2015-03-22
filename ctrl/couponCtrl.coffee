@@ -24,9 +24,8 @@ class CouponCtrl
       getMember:(cb) ->
         MemberCtrl.weixinLogin openid,(err,res) ->
           cb err,res
-      couponUse:(cb,results) ->
+      couponUse:["getMember",(cb,results) ->
         member = results.getMember?.data
-        console.log member
         if member?
           url = "#{config.inf.host}:#{config.inf.port}/api/coupon/scanUse"
           request {url,timeout:3000,method:"GET"},(err,response,body) ->
@@ -43,6 +42,7 @@ class CouponCtrl
                 cb new Error "Parse Error"
         else
           cb new Error "请先绑定账户"
+      ]
     },(err,results) ->
       fn err,results.couponUse
 

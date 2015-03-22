@@ -47,38 +47,39 @@
             return cb(err, res);
           });
         },
-        couponUse: function(cb, results) {
-          var member, url, _ref;
-          member = (_ref = results.getMember) != null ? _ref.data : void 0;
-          console.log(member);
-          if (member != null) {
-            url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/scanUse";
-            return request({
-              url: url,
-              timeout: 3000,
-              method: "GET"
-            }, function(err, response, body) {
-              var error, res;
-              if (err) {
-                return cb(err);
-              } else {
-                try {
-                  res = JSON.parse(body);
-                  if ((res.error != null) === 1) {
-                    return cb(new Error(res.errMsg));
-                  } else {
-                    return cb(null, res);
+        couponUse: [
+          "getMember", function(cb, results) {
+            var member, url, _ref;
+            member = (_ref = results.getMember) != null ? _ref.data : void 0;
+            if (member != null) {
+              url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/scanUse";
+              return request({
+                url: url,
+                timeout: 3000,
+                method: "GET"
+              }, function(err, response, body) {
+                var error, res;
+                if (err) {
+                  return cb(err);
+                } else {
+                  try {
+                    res = JSON.parse(body);
+                    if ((res.error != null) === 1) {
+                      return cb(new Error(res.errMsg));
+                    } else {
+                      return cb(null, res);
+                    }
+                  } catch (_error) {
+                    error = _error;
+                    return cb(new Error("Parse Error"));
                   }
-                } catch (_error) {
-                  error = _error;
-                  return cb(new Error("Parse Error"));
                 }
-              }
-            });
-          } else {
-            return cb(new Error("请先绑定账户"));
+              });
+            } else {
+              return cb(new Error("请先绑定账户"));
+            }
           }
-        }
+        ]
       }, function(err, results) {
         return fn(err, results.couponUse);
       });
