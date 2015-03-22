@@ -72,14 +72,14 @@
     <!-- /section:basics/sidebar.horizontal -->
     <div class="main-content">
         <div class="page-content">
-            <ul>
+            <ul class="dropdown-menu dropdown-navbar">
+                <%coupons.forEach(function(c){%>
                 <li>
                     <a href="#">
                         <img src="../assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar">
                         <span class="msg-body">
                             <span class="msg-title">
-                                <span class="blue">Alex:</span>
-                                Ciao sociis natoque penatibus et auctor ...
+                                <span class="blue"><%=c.name%></span>
                             </span>
 
                             <span class="msg-time">
@@ -89,6 +89,7 @@
                         </span>
                     </a>
                 </li>
+                <%})%>
             </ul>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
