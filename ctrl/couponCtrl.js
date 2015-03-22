@@ -57,7 +57,10 @@
               return request({
                 url: url,
                 timeout: 3000,
-                method: "GET"
+                method: "POST",
+                form: {
+                  id: id
+                }
               }, function(err, response, body) {
                 var error, res;
                 if (err) {

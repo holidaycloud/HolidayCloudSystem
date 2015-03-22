@@ -29,7 +29,7 @@ class CouponCtrl
         member = results.getMember?.data
         if member?
           url = "#{config.inf.host}:#{config.inf.port}/api/coupon/scanUse"
-          request {url,timeout:3000,method:"GET"},(err,response,body) ->
+          request {url,timeout:3000,method:"POST",form:{id}},(err,response,body) ->
             if err
               cb err
             else

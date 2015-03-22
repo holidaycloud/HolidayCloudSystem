@@ -83,7 +83,7 @@ class WeixinCtrl
                     """
         else
           fn null,res
-      when "scancode_waitmsg" then CouponCtrl.use msgObj.xml.ScanCodeInfo[0],msgObj.xml.FromUserName[0],(err,res) ->
+      when "scancode_waitmsg" then CouponCtrl.use msgObj.xml.ScanCodeInfo[0].ScanResult[0],msgObj.xml.FromUserName[0],(err,res) ->
         console.log err,res
         if err
           fn null,"""
