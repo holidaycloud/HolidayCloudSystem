@@ -1,6 +1,7 @@
 request = require "request"
 config = require "./../config/config.json"
 MemberCtrl = require "./memberCtrl"
+async = require "async"
 class CouponCtrl
 
   @list:(ent,fn) ->
