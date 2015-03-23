@@ -168,6 +168,7 @@
             entName = coupon.ent.name;
             useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss");
             remark = "感谢您的支持";
+            console.log("send weixin coupon temp", toUser, global.weixinEnt);
             url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/sendCouponTemplate/" + global.weixinEnt;
             return request({
               url: url,

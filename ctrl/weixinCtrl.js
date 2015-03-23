@@ -151,7 +151,6 @@
           });
         case "scancode_waitmsg":
           return CouponCtrl.use(msgObj.xml.ScanCodeInfo[0].ScanResult[0], msgObj.xml.FromUserName[0], function(err, res) {
-            console.log(err, res);
             if (err) {
               return fn(null, "<xml>\n<ToUserName><![CDATA[" + msgObj.xml.FromUserName[0] + "]]></ToUserName>\n<FromUserName><![CDATA[" + msgObj.xml.ToUserName[0] + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[text]]></MsgType>\n<Content><![CDATA[" + err.message + "]]></Content>\n</xml>");
             } else {
