@@ -74,16 +74,13 @@ class CouponCtrl
         else
           cb new Error "请先绑定账户"
       ]
-      ,getCoupon:(cb) ->
-        _this.detail id,(err,res) ->
-          cb err,res
-      ,getCustomer:["getCoupon",(cb,results) ->
-        coupon = results.getCoupon.data
+      ,getCustomer:["couponUse",(cb,results) ->
+        coupon = results.couponUse.data
         CustomerCtrl.detail coupon.customer,(err,res) ->
           cb err,res
       ]
-      ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
-        coupon = results.getCoupon.data
+      ,sendTemplate:["couponUse","getCustomer",(cb,results) ->
+        coupon = results.couponUse.data
         customer = results.getCustomer.data
         tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos"
         toUser = customer.weixinOpenId

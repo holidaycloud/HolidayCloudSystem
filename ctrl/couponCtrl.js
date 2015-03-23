@@ -142,24 +142,19 @@
             }
           }
         ],
-        getCoupon: function(cb) {
-          return _this.detail(id, function(err, res) {
-            return cb(err, res);
-          });
-        },
         getCustomer: [
-          "getCoupon", function(cb, results) {
+          "couponUse", function(cb, results) {
             var coupon;
-            coupon = results.getCoupon.data;
+            coupon = results.couponUse.data;
             return CustomerCtrl.detail(coupon.customer, function(err, res) {
               return cb(err, res);
             });
           }
         ],
         sendTemplate: [
-          "getCoupon", "couponUse", "getCustomer", function(cb, results) {
+          "couponUse", "getCustomer", function(cb, results) {
             var coupon, couponId, customer, entName, name, remark, tempId, toUser, url, useDate;
-            coupon = results.getCoupon.data;
+            coupon = results.couponUse.data;
             customer = results.getCustomer.data;
             tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos";
             toUser = customer.weixinOpenId;
