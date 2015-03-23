@@ -142,19 +142,26 @@
             }
           }
         ],
+        getCoupon: [
+          "couponUse", function(cb) {
+            return _this.detail(id, function(err, res) {
+              return cb(err, res);
+            });
+          }
+        ],
         getCustomer: [
-          "couponUse", function(cb, results) {
+          "getCoupon", function(cb, results) {
             var coupon;
-            coupon = results.couponUse.data;
+            coupon = results.getCoupon.data;
             return CustomerCtrl.detail(coupon.customer, function(err, res) {
               return cb(err, res);
             });
           }
         ],
         sendTemplate: [
-          "couponUse", "getCustomer", function(cb, results) {
+          "getCoupon", "couponUse", "getCustomer", function(cb, results) {
             var coupon, couponId, customer, entName, name, remark, tempId, toUser, url, useDate;
-            coupon = results.couponUse.data;
+            coupon = results.getCoupon.data;
             customer = results.getCustomer.data;
             tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos";
             toUser = customer.weixinOpenId;
@@ -163,7 +170,6 @@
             entName = coupon.ent.name;
             useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss");
             remark = "感谢您的支持";
-            console.log("send weixin coupon temp", toUser, global.weixinEnt);
             url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/sendCouponTemplate/" + global.weixinEnt;
             return request({
               url: url,

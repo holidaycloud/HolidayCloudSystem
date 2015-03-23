@@ -74,13 +74,17 @@ class CouponCtrl
         else
           cb new Error "请先绑定账户"
       ]
-      ,getCustomer:["couponUse",(cb,results) ->
-        coupon = results.couponUse.data
+      ,getCoupon:["couponUse",(cb) ->
+        _this.detail id,(err,res) ->
+          cb err,res
+      ]
+      ,getCustomer:["getCoupon",(cb,results) ->
+        coupon = results.getCoupon.data
         CustomerCtrl.detail coupon.customer,(err,res) ->
           cb err,res
       ]
-      ,sendTemplate:["couponUse","getCustomer",(cb,results) ->
-        coupon = results.couponUse.data
+      ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
+        coupon = results.getCoupon.data
         customer = results.getCustomer.data
         tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos"
         toUser = customer.weixinOpenId
@@ -89,7 +93,6 @@ class CouponCtrl
         entName = coupon.ent.name
         useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss")
         remark = "感谢您的支持"
-        console.log "send weixin coupon temp",toUser,global.weixinEnt
         url = "#{config.weixin.host}:#{config.weixin.port}/weixin/sendCouponTemplate/#{global.weixinEnt}"
         request {url,timeout:3000,method:"POST",form:{tempId,toUser,couponId,name,entName,useDate,remark}},(err,response,body) ->
          if err
