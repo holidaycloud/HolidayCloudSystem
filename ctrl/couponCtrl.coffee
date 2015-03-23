@@ -1,6 +1,8 @@
 request = require "request"
 config = require "./../config/config.json"
 MemberCtrl = require "./memberCtrl"
+WeixinCtrl = require "./weixinCtrl"
+CustomerCtrl = require "./customerCtrl"
 async = require "async"
 class CouponCtrl
 
@@ -33,8 +35,23 @@ class CouponCtrl
             fn null,res
         catch error
           fn new Error("Parse Error")
+  @detail:(id,fn) ->
+    url = "#{config.inf.host}:#{config.inf.port}/api/coupon/detail?id=#{id}"
+    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+      if err
+        fn err
+      else
+        try
+          res = JSON.parse(body)
+          if res.error? is 1
+            fn new Error(res.errMsg)
+          else
+            fn null,res
+        catch error
+          fn new Error("Parse Error")
 
   @use:(id,openid,fn) ->
+    _this = @
     console.log id,openid
     async.auto {
       getMember:(cb) ->
@@ -64,7 +81,26 @@ class CouponCtrl
         else
           cb new Error "请先绑定账户"
       ]
+      ,getCoupon:(cb) ->
+        _this.detail id,(err,res) ->
+          cb err,res
+      ,getCustomer:["getCoupon",(cb,results) ->
+        coupon = results.getCoupon.data
+        CustomerCtrl.detail coupon.customer,(err,res) ->
+          cb err,res
+      ]
+      ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
+        useResult = results.couponUse;
+        if useResult?
+          coupon = results.getCoupon.data
+          customer = results.getCustomer.data
+          WeixinCtrl.sendCouponTemplate global.weixinEnt,"wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos",customer.weixinOpenId,coupon._id,coupon.name,coupon.ent.name,new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"),"感谢您的支持",(err,res) ->
+            cb err,res
+        else
+          cb null,null
+      ]
     },(err,results) ->
+      console.log results
       fn err,results.couponUse
 
 module.exports = CouponCtrl
