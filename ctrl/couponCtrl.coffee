@@ -35,6 +35,7 @@ class CouponCtrl
           fn new Error("Parse Error")
 
   @use:(id,openid,fn) ->
+    console.log id,openid
     async.auto {
       getMember:(cb) ->
         MemberCtrl.weixinLogin openid,(err,res) ->

@@ -68,6 +68,7 @@
     };
 
     CouponCtrl.use = function(id, openid, fn) {
+      console.log(id, openid);
       return async.auto({
         getMember: function(cb) {
           return MemberCtrl.weixinLogin(openid, function(err, res) {
