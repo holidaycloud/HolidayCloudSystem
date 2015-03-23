@@ -2,10 +2,8 @@ request = require "request"
 config = require "./../config/config.json"
 MemberCtrl = require "./memberCtrl"
 CustomerCtrl = require "./customerCtrl"
-WeixinCtrl = require "./weixinCtrl"
 async = require "async"
 class CouponCtrl
-
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/fulllist?ent=#{ent}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->
@@ -90,16 +88,28 @@ class CouponCtrl
           cb err,res
       ]
       ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
-        console.log "-----------------",WeixinCtrl,"-------------------------"
-        cb null
-#        useResult = results.couponUse
-#        if useResult?
-#          coupon = results.getCoupon.data
-#          customer = results.getCustomer.data
-#          WeixinCtrl.sendCT global.weixinEnt,"wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos",customer.weixinOpenId,coupon._id,coupon.name,coupon.ent.name,new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"),"感谢您的支持",(err,res) ->
-#            cb err,res
-#        else
-#          cb null,null
+        coupon = results.getCoupon.data
+        customer = results.getCustomer.data
+        tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos"
+        toUser = customer.weixinOpenId
+        couponId = coupon._id
+        name = coupon.name
+        entName = coupon.ent.name
+        useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss")
+        remark = "感谢您的支持"
+        url = "#{config.weixin.host}:#{config.weixin.port}/weixin/sendCouponTemplate/#{global.weixinEnt}"
+        request {url,timeout:3000,method:"POST",form:{tempId,toUser,couponId,name,entName,useDate,remark}},(err,response,body) ->
+         if err
+           fn err
+         else
+           try
+             res = JSON.parse(body)
+             if res.error? is 1
+               cb new Error(res.errMsg)
+             else
+               cb null,res
+           catch error
+             cb new Error("Parse Error")
       ]
     },(err,results) ->
       console.log results
