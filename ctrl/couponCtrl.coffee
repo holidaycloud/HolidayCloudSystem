@@ -1,8 +1,8 @@
 request = require "request"
 config = require "./../config/config.json"
 MemberCtrl = require "./memberCtrl"
-WeixinCtrl = require "./weixinCtrl"
 CustomerCtrl = require "./customerCtrl"
+WeixinCtrl = require "./weixinCtrl"
 async = require "async"
 class CouponCtrl
 
@@ -90,17 +90,14 @@ class CouponCtrl
           cb err,res
       ]
       ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
-        useResult = results.couponUse;
-        if useResult?
-          coupon = results.getCoupon.data
-          customer = results.getCustomer.data
-
-          console.log WeixinCtrl,coupon,customer
-          cb null
-#          WeixinCtrl.sendCT global.weixinEnt,"wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos",customer.weixinOpenId,coupon._id,coupon.name,coupon.ent.name,new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"),"感谢您的支持",(err,res) ->
-#            cb err,res
-        else
-          cb null,null
+        useResult = results.couponUse
+#        if useResult?
+        coupon = results.getCoupon.data
+        customer = results.getCustomer.data
+        WeixinCtrl.sendCT global.weixinEnt,"wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos",customer.weixinOpenId,coupon._id,coupon.name,coupon.ent.name,new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"),"感谢您的支持",(err,res) ->
+          cb err,res
+#        else
+#          cb null,null
       ]
     },(err,results) ->
       console.log results
