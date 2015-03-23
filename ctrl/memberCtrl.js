@@ -126,7 +126,7 @@
 
     MemberCtrl.weixinLogin = function(openid, fn) {
       var url;
-      url = "" + config.inf.host + ":" + config.inf.port + "/api/member/weixinLogin?opind=" + openid;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/member/weixinLogin?openid=" + openid;
       return request({
         url: url,
         timeout: 3000,

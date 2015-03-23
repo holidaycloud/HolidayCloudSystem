@@ -63,7 +63,7 @@ class MemberCtrl
           fn new Error("Parse Error")
 
   @weixinLogin:(openid,fn) ->
-    url = "#{config.inf.host}:#{config.inf.port}/api/member/weixinLogin?opind=#{openid}"
+    url = "#{config.inf.host}:#{config.inf.port}/api/member/weixinLogin?openid=#{openid}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->
       if err
         fn err
