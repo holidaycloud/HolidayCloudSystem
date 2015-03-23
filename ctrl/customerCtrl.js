@@ -170,6 +170,7 @@
 
     _getCoupon = function(customer, marketing) {
       var deferred, url;
+      console.log("---------------------", customer, marketing);
       deferred = Q.defer();
       url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/give";
       request({
