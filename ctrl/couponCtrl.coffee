@@ -42,6 +42,7 @@ class CouponCtrl
           cb err,res
       couponUse:["getMember",(cb,results) ->
         member = results.getMember?.data
+        console.log member
         if member?
           url = "#{config.inf.host}:#{config.inf.port}/api/coupon/scanUse"
           request {url,timeout:3000,method:"POST",form:{id}},(err,response,body) ->
