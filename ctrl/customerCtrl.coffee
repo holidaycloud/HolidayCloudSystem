@@ -2,6 +2,7 @@ request = require "request"
 config = require "./../config/config.json"
 async = require "async"
 Q = require "q"
+Marketing = require "./../config/marketing.json"
 class CustomerCtrl
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/customer/fulllist?ent=#{ent}"
@@ -69,10 +70,7 @@ class CustomerCtrl
     _getCustomerInfo openid
     .then(
       (customer) ->
-        if parseInt(sceneid) is 99999
-          _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
-        else
-          _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
+          _getCoupon customer._id,Marketing[sceneid].id
       ,(err) ->
         fn err
       )
@@ -89,7 +87,7 @@ class CustomerCtrl
                 <item>
                 <Title><![CDATA[您获得一张优惠券]]></Title>
                 <Description><![CDATA[#{coupon.data.name}]]></Description>
-                <PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>
+                <PicUrl><![CDATA[#{Marketing[sceneid].image}]]></PicUrl>
                 <Url><![CDATA[http://test.meitrip.net/couponDetail?id=#{coupon.data._id}]]></Url>
                 </item>
                 </Articles>
