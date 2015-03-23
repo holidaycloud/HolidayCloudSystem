@@ -118,7 +118,6 @@ class CustomerCtrl
     deferred.promise
 
   _getCoupon = (customer,marketing) ->
-    console.log "---------------------",customer,marketing
     deferred = Q.defer()
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/give"
     request {url,timeout:3000,method:"POST",form:{ent:global.weixinEnt,customer,marketing}},(err,response,body) ->
