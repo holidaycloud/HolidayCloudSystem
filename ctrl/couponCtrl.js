@@ -79,7 +79,7 @@
           "getMember", function(cb, results) {
             var member, url, _ref;
             member = (_ref = results.getMember) != null ? _ref.data : void 0;
-            console.log(member);
+            console.log("----------------------------\n" + member + "\n----------------------------");
             if (member != null) {
               url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/scanUse";
               return request({
