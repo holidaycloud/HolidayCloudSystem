@@ -73,9 +73,9 @@
     };
 
     WeixinCtrl.sendCouponTemplate = function(ent, tempId, toUser, couponId, name, entName, useDate, remark, fn) {
-      var error, res, url;
+      var url;
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/sendCouponTemplate/" + ent;
-      request({
+      return request({
         url: url,
         timeout: 3000,
         method: "POST",
@@ -88,22 +88,24 @@
           useDate: useDate,
           remark: remark
         }
-      }, function(err, response, body) {});
-      if (err) {
-        return fn(err);
-      } else {
-        try {
-          res = JSON.parse(body);
-          if ((res.error != null) === 1) {
-            return fn(new Error(res.errMsg));
-          } else {
-            return fn(null, res);
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return fn(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return fn(new Error(res.errMsg));
+            } else {
+              return fn(null, res);
+            }
+          } catch (_error) {
+            error = _error;
+            return fn(new Error("Parse Error"));
           }
-        } catch (_error) {
-          error = _error;
-          return fn(new Error("Parse Error"));
         }
-      }
+      });
     };
 
 
