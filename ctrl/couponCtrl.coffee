@@ -35,7 +35,6 @@ class CouponCtrl
           fn new Error("Parse Error")
 
   @use:(id,openid,fn) ->
-    console.log id
     async.auto {
       getMember:(cb) ->
         MemberCtrl.weixinLogin openid,(err,res) ->
@@ -44,7 +43,7 @@ class CouponCtrl
         member = results.getMember?.data
         console.log """
                       ----------------------------
-                      #{member}
+                      #{JSON.stringify member}
                       ----------------------------
                      """
         if member?
