@@ -166,7 +166,7 @@
             if (useResult != null) {
               coupon = results.getCoupon.data;
               customer = results.getCustomer.data;
-              return WeixinCtrl.sendCouponTemplate(global.weixinEnt, "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos", customer.weixinOpenId, coupon._id, coupon.name, coupon.ent.name, new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"), "感谢您的支持", function(err, res) {
+              return WeixinCtrl.sendCT(global.weixinEnt, "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos", customer.weixinOpenId, coupon._id, coupon.name, coupon.ent.name, new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"), "感谢您的支持", function(err, res) {
                 return cb(err, res);
               });
             } else {

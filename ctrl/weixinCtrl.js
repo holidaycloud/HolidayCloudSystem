@@ -72,7 +72,7 @@
       });
     };
 
-    WeixinCtrl.sendCouponTemplate = function(ent, tempId, toUser, couponId, name, entName, useDate, remark, fn) {
+    WeixinCtrl.sendCT = function(ent, tempId, toUser, couponId, name, entName, useDate, remark, fn) {
       var url;
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/sendCouponTemplate/" + ent;
       return request({

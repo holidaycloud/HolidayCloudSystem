@@ -34,7 +34,7 @@ class WeixinCtrl
         catch error
           fn new Error("Parse Error")
 
-  @sendCouponTemplate:(ent,tempId,toUser,couponId,name,entName,useDate,remark,fn) ->
+  @sendCT:(ent,tempId,toUser,couponId,name,entName,useDate,remark,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/sendCouponTemplate/#{ent}"
     request {url,timeout:3000,method:"POST",form:{tempId,toUser,couponId,name,entName,useDate,remark}},(err,response,body) ->
       if err
