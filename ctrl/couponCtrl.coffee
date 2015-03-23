@@ -91,13 +91,13 @@ class CouponCtrl
       ]
       ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
         useResult = results.couponUse
-#        if useResult?
-        coupon = results.getCoupon.data
-        customer = results.getCustomer.data
-        WeixinCtrl.sendCT global.weixinEnt,"wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos",customer.weixinOpenId,coupon._id,coupon.name,coupon.ent.name,new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"),"感谢您的支持",(err,res) ->
-          cb err,res
-#        else
-#          cb null,null
+        if useResult?
+          coupon = results.getCoupon.data
+          customer = results.getCustomer.data
+          WeixinCtrl.sendCT global.weixinEnt,"wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos",customer.weixinOpenId,coupon._id,coupon.name,coupon.ent.name,new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss"),"感谢您的支持",(err,res) ->
+            cb err,res
+        else
+          cb null,null
       ]
     },(err,results) ->
       console.log results
