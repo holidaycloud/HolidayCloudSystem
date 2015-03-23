@@ -91,6 +91,7 @@ class CouponCtrl
       ]
       ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
         console.log "-----------------",WeixinCtrl,"-------------------------"
+        cb null
 #        useResult = results.couponUse
 #        if useResult?
 #          coupon = results.getCoupon.data

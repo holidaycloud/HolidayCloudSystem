@@ -161,7 +161,8 @@
         ],
         sendTemplate: [
           "getCoupon", "couponUse", "getCustomer", function(cb, results) {
-            return console.log("-----------------", WeixinCtrl, "-------------------------");
+            console.log("-----------------", WeixinCtrl, "-------------------------");
+            return cb(null);
           }
         ]
       }, function(err, results) {
