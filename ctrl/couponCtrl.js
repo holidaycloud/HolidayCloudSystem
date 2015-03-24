@@ -15,6 +15,59 @@
   CouponCtrl = (function() {
     function CouponCtrl() {}
 
+    CouponCtrl.pieAnalysis = function(ent, fn) {
+      var _this;
+      _this = this;
+      return async.parallel([
+        function(cb) {
+          return _this.count(ent, "noreceived", function(err, res) {
+            return cb(err, res);
+          });
+        }, function(cb) {
+          return _this.count(ent, "received", function(err, res) {
+            return cb(err, res);
+          });
+        }, function(cb) {
+          return _this.count(ent, "used", function(err, res) {
+            return cb(err, res);
+          });
+        }
+      ], function(err, results) {
+        if (err) {
+          return fn(err);
+        } else {
+          return fn(err, results);
+        }
+      });
+    };
+
+    CouponCtrl.count = function(ent, type, fn) {
+      var url;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/count?ent=" + ent + "&type=" + type;
+      return request({
+        url: url,
+        timeout: 3000,
+        method: "GET"
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return fn(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return fn(new Error(res.errMsg));
+            } else {
+              return fn(null, res);
+            }
+          } catch (_error) {
+            error = _error;
+            return fn(new Error("Parse Error"));
+          }
+        }
+      });
+    };
+
     CouponCtrl.list = function(ent, fn) {
       var url;
       url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/fulllist?ent=" + ent;

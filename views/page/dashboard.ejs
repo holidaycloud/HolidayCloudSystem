@@ -10,10 +10,75 @@
 </div><!-- /.page-header -->
 
 <div class="row">
-    <div class="col-xs-12">
-        <div class="center">
+    <div class="col-xs-12 col-sm-6 widget-container-col">
+        <!-- #section:custom/widget-box -->
+        <div class="widget-box">
+            <div class="widget-header">
+                <h5 class="widget-title">优惠券情况</h5>
+                <!-- #section:custom/widget-box.toolbar -->
+                <div class="widget-toolbar">
 
-        </div>
-        <!-- PAGE CONTENT ENDS -->
-    </div><!-- /.col -->
+                    <a href="#" data-action="fullscreen" class="orange2">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+
+                    <a href="#" data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+
+                <!-- /section:custom/widget-box.toolbar -->
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div id="container">
+
+                    </div>
+                </div>
+            </div>
+            <iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe></div>
+
+        <!-- /section:custom/widget-box -->
+    </div>
+
 </div><!-- /.row -->
+<script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            credits:{
+                enabled:false
+            },
+            title: {
+                text: ''
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '优惠券领用情况',
+                data: [
+                    ["未领取",<%=data[0].data%>],
+                    ["已领取",<%=data[1].data%>],
+                    ["已使用",<%=data[2].data%>],
+                ]
+            }]
+        });
+    });
+</script>

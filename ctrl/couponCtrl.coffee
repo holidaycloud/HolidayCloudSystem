@@ -4,6 +4,39 @@ MemberCtrl = require "./memberCtrl"
 CustomerCtrl = require "./customerCtrl"
 async = require "async"
 class CouponCtrl
+  @pieAnalysis:(ent,fn) ->
+    _this = @
+    async.parallel [
+      (cb) ->
+        _this.count ent,"noreceived",(err,res) ->
+          cb err,res
+      ,(cb) ->
+        _this.count ent,"received",(err,res) ->
+          cb err,res
+      ,(cb) ->
+        _this.count ent,"used",(err,res) ->
+          cb err,res
+    ],(err,results) ->
+      if err
+        fn err
+      else
+        fn err,results
+
+  @count:(ent,type,fn) ->
+    url = "#{config.inf.host}:#{config.inf.port}/api/coupon/count?ent=#{ent}&type=#{type}"
+    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+      if err
+        fn err
+      else
+        try
+          res = JSON.parse(body)
+          if res.error? is 1
+            fn new Error(res.errMsg)
+          else
+            fn null,res
+        catch error
+          fn new Error("Parse Error")
+
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/fulllist?ent=#{ent}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->

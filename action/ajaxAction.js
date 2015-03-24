@@ -15,7 +15,11 @@
   async = require("async");
 
   exports.dashboard = function(req, res) {
-    return res.render("./page/dashboard");
+    return CouponCtrl.pieAnalysis(req.session.member.ent._id, function(err, results) {
+      return res.render("./page/dashboard", {
+        data: results
+      });
+    });
   };
 
   exports.profile = function(req, res) {

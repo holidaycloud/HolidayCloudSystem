@@ -5,7 +5,8 @@ MemberCtrl = require "./../ctrl/memberCtrl"
 CouponCtrl = require "./../ctrl/couponCtrl"
 async = require "async"
 exports.dashboard = (req,res) ->
-  res.render "./page/dashboard"
+  CouponCtrl.pieAnalysis req.session.member.ent._id,(err,results) ->
+    res.render "./page/dashboard",data:results
 
 exports.profile = (req,res) ->
   res.render "./page/profile",{member:req.session.member}
