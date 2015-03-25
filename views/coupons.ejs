@@ -77,10 +77,10 @@
                     <%coupons.forEach(function(c){%>
                     <div class="alert alert-success">
                         <a href="/couponDetail?id=<%=c._id%>" style="text-decoration: none;">
-                            <div class="pull-left">
+                            <div>
                                 <img src="<%=MarketingImg[c.marketing._id]%>" class="img-responsive" />
                             </div>
-                            <div style="padding-top: 5px;">
+                            <div style="padding-top: 8px;">
                                 <h3><%=c.name%></h3>
                                 <p>
                                     <%=c.marketing.name%>
