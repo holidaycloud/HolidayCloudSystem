@@ -130,7 +130,7 @@
   _getCoupons = function(customer) {
     var deferred, url;
     deferred = Q.defer();
-    url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/customerCoupons?ent=" + global.weixinEnt + "&customer=" + customer + "&status=0";
+    url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/customerCoupons?ent=" + global.weixinEnt + "&customer=" + customer;
     request({
       url: url,
       timeout: 3000,

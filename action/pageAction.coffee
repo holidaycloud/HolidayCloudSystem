@@ -76,7 +76,7 @@ _getCustomerInfo = (openid) ->
 
 _getCoupons = (customer) ->
   deferred = Q.defer()
-  url = "#{config.inf.host}:#{config.inf.port}/api/coupon/customerCoupons?ent=#{global.weixinEnt}&customer=#{customer}&status=0"
+  url = "#{config.inf.host}:#{config.inf.port}/api/coupon/customerCoupons?ent=#{global.weixinEnt}&customer=#{customer}"
   request {url,timeout:3000,method:"GET"},(err,response,body) ->
     if err
       deferred.reject err
