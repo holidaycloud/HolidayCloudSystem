@@ -78,13 +78,22 @@
                     <div class="alert alert-success">
                         <a href="/couponDetail?id=<%=c._id%>" style="text-decoration: none;">
                             <div>
-                                <img src="<%=MarketingImg[c.marketing._id]%>" class="img-responsive" />
+                                <img src="<%=MarketingImg[c.marketing._id]%>" class="img-responsive img-rounded" />
                             </div>
                             <div style="padding-top: 8px;">
-                                <h3><%=c.name%></h3>
-                                <p>
-                                    <%=c.marketing.name%>
-                                </p>
+                                <div>
+                                    <h3><%=c.name%></h3>
+                                    <p>
+                                        <%=c.marketing.name%>
+                                    </p>
+                                </div>
+                                <div class="pull-right">
+                                    <%if(c.status == 0){%>
+                                    <span class="green">未使用</span>
+                                    <%} else {%>
+                                    <span class="red">已使用</span>
+                                    <%}%>
+                                </div>
                             </div>
 
                         </a>
