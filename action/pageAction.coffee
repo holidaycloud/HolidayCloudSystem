@@ -3,8 +3,10 @@ WeixinCtrl = require "./../ctrl/weixinCtrl"
 Q = require "q"
 QRCodeExtend = require "./../tools/qrcodeExtend"
 config = require "./../config/config.json"
+MarketingImg = requrie "./../config/marketingImg.json"
 request = require "request"
 async = require "async"
+
 exports.index = (req,res) ->
   token = req.cookies.token or req.flash "token"
   tokenExpires = req.cookies.tokenExpires or req.flash "tokenExpires"
@@ -150,7 +152,7 @@ exports.coupons = (req,res) ->
       res.status(500).end()
   ).then(
     (coupons) ->
-      res.render "coupons",{coupons}
+      res.render "coupons",{coupons,MarketingImg}
     (err) ->
       console.log err
       res.status(500).end()
