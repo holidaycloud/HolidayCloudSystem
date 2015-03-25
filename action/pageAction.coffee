@@ -112,10 +112,12 @@ _createQrcode = (id) ->
   scala = 3
   logoSize = 0.2
   deferred = Q.defer()
-
-  QRCodeExtend.withLogoToDataURL id,"./public/assets/images/logo.png",4,(err,results) ->
+  QRCodeExtend.toDataUrl "id",4,(err,results) ->
     deferred.reject err if err?
     deferred.resolve results
+#  QRCodeExtend.withLogoToDataURL id,"./public/assets/images/logo.png",4,(err,results) ->
+#    deferred.reject err if err?
+#    deferred.resolve results
   deferred.promise
 
 _couponUse = (id) ->

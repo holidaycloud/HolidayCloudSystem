@@ -37,4 +37,15 @@
     });
   };
 
+  exports.toDataUrl = function(text, scala, callback) {
+    if (scala == null) {
+      scala = 1;
+    }
+    return QRCode.draw(text, {
+      scala: 4 * scala
+    }, function(error, canvas) {
+      return callback(null, canvas.toDataURL());
+    });
+  };
+
 }).call(this);

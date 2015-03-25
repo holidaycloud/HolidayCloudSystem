@@ -17,3 +17,7 @@ exports.withLogoToDataURL = (text,logo,scala=1,callback) ->
       y = (canvas.height/2) - (h/2)
       ctx.drawImage img,x,y,w,h
       callback null,canvas.toDataURL()
+
+exports.toDataUrl = (text,scala=1,callback) ->
+  QRCode.draw text,scala:4*scala,(error,canvas) ->
+    callback null,canvas.toDataURL()
