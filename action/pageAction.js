@@ -12,7 +12,7 @@
 
   config = require("./../config/config.json");
 
-  MarketingImg = requrie("./../config/marketingImg.json");
+  MarketingImg = require("./../config/marketingImg.json");
 
   request = require("request");
 

@@ -3,7 +3,7 @@ WeixinCtrl = require "./../ctrl/weixinCtrl"
 Q = require "q"
 QRCodeExtend = require "./../tools/qrcodeExtend"
 config = require "./../config/config.json"
-MarketingImg = requrie "./../config/marketingImg.json"
+MarketingImg = require "./../config/marketingImg.json"
 request = require "request"
 async = require "async"
 
