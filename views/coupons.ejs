@@ -77,19 +77,16 @@
                     <%coupons.forEach(function(c){%>
                     <div class="alert alert-success">
                         <a href="/couponDetail?id=<%=c._id%>">
-                            <h3><%=c.name%></h3>
-                            <p>
-                                <%if(c.type==0){%>
-                                金额券&nbsp;&nbsp;价值<%=c.value%>元
-                                <%} else if(c.type==1){%>
-                                折扣券
-                                <%} else if(c.type==2){%>
-                                产品固定价格
-                                <%} else if(c.type==3){%>
-                                免费券
-                                <%}%>
-                                &nbsp;&nbsp;最低使用金额:<%=c.minValue%>
-                            </p>
+                            <div class="pull-left">
+                                <img src="" class="img-responsive" />
+                            </div>
+                            <div>
+                                <h3><%=c.name%></h3>
+                                <p>
+                                    <%=c.marketing.name%>
+                                </p>
+                            </div>
+
                         </a>
                     </div>
                     <%})%>

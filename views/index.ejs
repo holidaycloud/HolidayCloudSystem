@@ -261,7 +261,7 @@
         </script>
 
         <ul class="nav nav-list">
-            <li class="active hover">
+            <li class="hover">
                 <a href="#dashboard" class="temp-page">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> 仪&nbsp;表&nbsp;盘 </span>
@@ -535,6 +535,7 @@
 
         $(".temp-page").click(function(e){
             var target = $(this).attr("href").replace("#","");
+            var that = this;
             $.ajax({
                 url:"/page/"+target
             }).done(function(data){
