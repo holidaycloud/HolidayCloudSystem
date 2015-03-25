@@ -81,16 +81,7 @@
                             <img class="img-responsive" alt="优惠券" src="<%=url%>" />
                         </span>
                         <h5>
-                            <%if(coupon.type==0){%>
-                            金额券&nbsp;&nbsp;价值<%=coupon.value%>元
-                            <%} else if(coupon.type==1){%>
-                            折扣券
-                            <%} else if(coupon.type==2){%>
-                            产品固定价格
-                            <%} else if(coupon.type==3){%>
-                            免费券
-                            <%}%>
-                            &nbsp;&nbsp;最低使用金额:<%=coupon.minValue%>
+                            <%=coupon.marketing.content%>
                         </h5>
                     </div>
                 </div>
