@@ -80,9 +80,6 @@
     $(function () {
         (function(){
             var map = new qq.maps.Map("map_canvas");
-            var info = new qq.maps.InfoWindow({
-                map: map
-            });
             var locations = [];
             <%locations.forEach(function(l){%>
             locations.push(<%-JSON.stringify(l)%>);
@@ -91,6 +88,9 @@
                 var point = new qq.maps.LatLng(locations[i].location.lat,locations[i].location.lon);
                 var marker = new qq.maps.Marker({
                     position: point,
+                    map: map
+                });
+                var info = new qq.maps.InfoWindow({
                     map: map
                 });
                 qq.maps.event.addListener(marker, 'click', function() {
