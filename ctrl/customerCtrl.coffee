@@ -40,19 +40,19 @@ class CustomerCtrl
         url = "#{config.inf.host}:#{config.inf.port}/api/customer/updateLocation"
         request {url,timeout:3000,method:"POST",form:{id:customer._id,lat,lon}},(err,response,body) ->
           if err
-            fn err
+            cb err
           else
             try
               res = JSON.parse(body)
               if res.error? is 1
-                fn new Error(res.errMsg)
+                cb new Error(res.errMsg)
               else
-                fn null,res.data
+                cb null,res.data
             catch error
-              fn new Error("Parse Error")
+              cb new Error("Parse Error")
       ]
     },(err,results) ->
-
+      fn err,results.update
 
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/customer/fulllist?ent=#{ent}"

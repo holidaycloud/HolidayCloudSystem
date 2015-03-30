@@ -89,24 +89,26 @@
             }, function(err, response, body) {
               var error, res;
               if (err) {
-                return fn(err);
+                return cb(err);
               } else {
                 try {
                   res = JSON.parse(body);
                   if ((res.error != null) === 1) {
-                    return fn(new Error(res.errMsg));
+                    return cb(new Error(res.errMsg));
                   } else {
-                    return fn(null, res.data);
+                    return cb(null, res.data);
                   }
                 } catch (_error) {
                   error = _error;
-                  return fn(new Error("Parse Error"));
+                  return cb(new Error("Parse Error"));
                 }
               }
             });
           }
         ]
-      }, function(err, results) {});
+      }, function(err, results) {
+        return fn(err, results.update);
+      });
     };
 
     CustomerCtrl.list = function(ent, fn) {
