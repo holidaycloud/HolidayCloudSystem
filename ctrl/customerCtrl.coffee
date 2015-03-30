@@ -4,6 +4,56 @@ async = require "async"
 Q = require "q"
 Marketing = require "./../config/marketing.json"
 class CustomerCtrl
+  @locations:(ent,fn) ->
+    url = "#{config.inf.host}:#{config.inf.port}/api/customer/customerLocations?ent=#{ent}"
+    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+      if err
+        fn err
+      else
+        try
+          res = JSON.parse(body)
+          if res.error? is 1
+            fn new Error(res.errMsg)
+          else
+            fn null,res.data
+        catch error
+          fn new Error("Parse Error")
+
+  @updateLocation:(openid,lat,lon,fn) ->
+    async.auto {
+      customerInfo:(cb) ->
+        url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinLogin?ent=#{global.weixinEnt}&openId=#{openid}"
+        request {url,timeout:3000,method:"GET"},(err,response,body) ->
+          if err
+            cb err
+          else
+            try
+              res = JSON.parse(body)
+              if res.error is 1
+               cb new Error(res.errMsg)
+              else
+                cb res.data
+            catch error
+              cb new Error("Parse Error")
+      ,update:["customerInfo",(cb,results) ->
+        customer = results.customerInfo
+        url = "#{config.inf.host}:#{config.inf.port}/api/customer/updateLocation"
+        request {url,timeout:3000,method:"POST",form:{id:customer._id,lat,lon}},(err,response,body) ->
+          if err
+            fn err
+          else
+            try
+              res = JSON.parse(body)
+              if res.error? is 1
+                fn new Error(res.errMsg)
+              else
+                fn null,res.data
+            catch error
+              fn new Error("Parse Error")
+      ]
+    },(err,results) ->
+
+
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/customer/fulllist?ent=#{ent}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->

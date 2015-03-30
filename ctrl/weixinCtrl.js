@@ -141,6 +141,10 @@
             });
           }
           break;
+        case "LOCATION":
+          return CustomerCtrl.updateLocation(msgObj.xml.FromUserName[0], msgObj.xml.Latitude[0], msgObj.xml.Longitude[0], function(err, res) {
+            return fn(err, '');
+          });
         case "SCAN":
           return CustomerCtrl.weixinCoupon(msgObj.xml.FromUserName[0], msgObj.xml.ToUserName[0], msgObj.xml.EventKey[0], function(err, res) {
             if (err) {

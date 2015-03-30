@@ -17,6 +17,98 @@
 
     function CustomerCtrl() {}
 
+    CustomerCtrl.locations = function(ent, fn) {
+      var url;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/customerLocations?ent=" + ent;
+      return request({
+        url: url,
+        timeout: 3000,
+        method: "GET"
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return fn(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return fn(new Error(res.errMsg));
+            } else {
+              return fn(null, res.data);
+            }
+          } catch (_error) {
+            error = _error;
+            return fn(new Error("Parse Error"));
+          }
+        }
+      });
+    };
+
+    CustomerCtrl.updateLocation = function(openid, lat, lon, fn) {
+      return async.auto({
+        customerInfo: function(cb) {
+          var url;
+          url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.weixinEnt + "&openId=" + openid;
+          return request({
+            url: url,
+            timeout: 3000,
+            method: "GET"
+          }, function(err, response, body) {
+            var error, res;
+            if (err) {
+              return cb(err);
+            } else {
+              try {
+                res = JSON.parse(body);
+                if (res.error === 1) {
+                  return cb(new Error(res.errMsg));
+                } else {
+                  return cb(res.data);
+                }
+              } catch (_error) {
+                error = _error;
+                return cb(new Error("Parse Error"));
+              }
+            }
+          });
+        },
+        update: [
+          "customerInfo", function(cb, results) {
+            var customer, url;
+            customer = results.customerInfo;
+            url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/updateLocation";
+            return request({
+              url: url,
+              timeout: 3000,
+              method: "POST",
+              form: {
+                id: customer._id,
+                lat: lat,
+                lon: lon
+              }
+            }, function(err, response, body) {
+              var error, res;
+              if (err) {
+                return fn(err);
+              } else {
+                try {
+                  res = JSON.parse(body);
+                  if ((res.error != null) === 1) {
+                    return fn(new Error(res.errMsg));
+                  } else {
+                    return fn(null, res.data);
+                  }
+                } catch (_error) {
+                  error = _error;
+                  return fn(new Error("Parse Error"));
+                }
+              }
+            });
+          }
+        ]
+      }, function(err, results) {});
+    };
+
     CustomerCtrl.list = function(ent, fn) {
       var url;
       url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/fulllist?ent=" + ent;

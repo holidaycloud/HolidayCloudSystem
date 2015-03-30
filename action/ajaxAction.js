@@ -15,9 +15,21 @@
   async = require("async");
 
   exports.dashboard = function(req, res) {
-    return CouponCtrl.pieAnalysis(req.session.member.ent._id, function(err, results) {
+    return async.auto({
+      pieAnalysis: function(cb) {
+        return CouponCtrl.pieAnalysis(req.session.member.ent._id, function(err, res) {
+          return cb(err, res);
+        });
+      },
+      locations: function(cb) {
+        return CustomerCtrl.locations(req.session.member.ent._id, function(err, res) {
+          return cb(err, res);
+        });
+      }
+    }, function(err, results) {
       return res.render("./page/dashboard", {
-        data: results
+        data: results.pieAnalysis,
+        locations: results.locations
       });
     });
   };

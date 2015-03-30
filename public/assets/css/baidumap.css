@@ -1,0 +1,9 @@
+#map_canvas{
+    border:1px solid #feffff;
+    margin:0;
+    height:400px;
+}
+
+#map_canvas img {
+    max-width: none;
+}

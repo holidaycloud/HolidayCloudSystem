@@ -5,8 +5,15 @@ MemberCtrl = require "./../ctrl/memberCtrl"
 CouponCtrl = require "./../ctrl/couponCtrl"
 async = require "async"
 exports.dashboard = (req,res) ->
-  CouponCtrl.pieAnalysis req.session.member.ent._id,(err,results) ->
-    res.render "./page/dashboard",data:results
+  async.auto {
+    pieAnalysis: (cb) ->
+      CouponCtrl.pieAnalysis req.session.member.ent._id, (err, res) ->
+        cb err, res
+    , locations: (cb) ->
+      CustomerCtrl.locations req.session.member.ent._id, (err, res) ->
+        cb err, res
+  },(err,results) ->
+    res.render "./page/dashboard",data:results.pieAnalysis,locations:results.locations
 
 exports.profile = (req,res) ->
   res.render "./page/profile",{member:req.session.member}

@@ -40,14 +40,63 @@
                     </div>
                 </div>
             </div>
-            <iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe></div>
-
         <!-- /section:custom/widget-box -->
+        </div>
     </div>
+    <div class="col-xs-12 col-sm-6 widget-container-col">
+        <!-- #section:custom/widget-box -->
+        <div class="widget-box">
+            <div class="widget-header">
+                <h5 class="widget-title">会员分布情况图</h5>
+                <!-- #section:custom/widget-box.toolbar -->
+                <div class="widget-toolbar">
 
+                    <a href="#" data-action="fullscreen" class="orange2">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+
+                    <a href="#" data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+
+                <!-- /section:custom/widget-box.toolbar -->
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div id="map_canvas">
+
+                    </div>
+                </div>
+            </div>
+            <!-- /section:custom/widget-box -->
+        </div>
 </div><!-- /.row -->
 <script>
     $(function () {
+        (function(){
+            var map = new BMap.Map('map_canvas');
+            map.addControl(new BMap.NavigationControl());
+            var locations = [];
+            <%locations.forEach(function(l){%>
+            locations.push(<%-JSON.stringify(l)%>);
+            <%})%>
+            for(var i in locations){
+                var point = new BMap.Point(locations[i].location.lon,locations[i].location.lat);
+                var marker = new BMap.Marker(point);
+                var label = new BMap.Label(locations[i].loginName);
+                marker.setLabel(label);
+                map.addOverlay(marker);
+                map.centerAndZoom(point, 15);
+            }
+        })()
+
+
+
         $('#container').highcharts({
             chart: {
                 plotBackgroundColor: null,
