@@ -39,7 +39,7 @@ class CouponCtrl
 
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/fulllist?ent=#{ent}"
-    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+    request {url,method:"GET"},(err,response,body) ->
       if err
         fn err
       else

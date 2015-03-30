@@ -73,7 +73,6 @@
       url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/fulllist?ent=" + ent;
       return request({
         url: url,
-        timeout: 3000,
         method: "GET"
       }, function(err, response, body) {
         var error, res;
