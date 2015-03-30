@@ -84,16 +84,22 @@
             <%locations.forEach(function(l){%>
             locations.push(<%-JSON.stringify(l)%>);
             <%})%>
+            var qqLocArr = [];
             for(var i in locations){
-                var point = new qq.maps.LatLng(locations[i].location.lat,locations[i].location.lon);
-                var marker = new qq.maps.Marker({
-                    position: point,
-                    map: map
-                });
-                marker.setTitle(locations[i].loginName);
-                map.setCenter(point);
-                map.zoomTo(15);
+                qqLocArr.push(new qq.maps.LatLng(locations[i].location.lat,locations[i].location.lon));
             }
+            qq.maps.convertor.translate(qqLocArr, 1, function(res){
+                for(var i in res){
+                    var point = res[i];
+                    var marker = new qq.maps.Marker({
+                        position: point,
+                        map: map
+                    });
+                    marker.setTitle(locations[i].loginName);
+                    map.setCenter(point);
+                    map.zoomTo(15);
+                }
+            });
         })()
 
 
