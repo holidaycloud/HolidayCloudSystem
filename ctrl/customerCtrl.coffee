@@ -52,9 +52,6 @@ class CustomerCtrl
               cb new Error("Parse Error")
       ]
     },(err,results) ->
-      console.log "----------------------------"
-      console.log err,results
-      console.log "----------------------------"
       fn err,results.update
 
   @list:(ent,fn) ->
