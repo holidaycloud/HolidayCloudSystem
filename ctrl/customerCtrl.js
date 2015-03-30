@@ -63,7 +63,7 @@
                 if (res.error === 1) {
                   return cb(new Error(res.errMsg));
                 } else {
-                  return cb(res.data);
+                  return cb(null, res.data);
                 }
               } catch (_error) {
                 error = _error;

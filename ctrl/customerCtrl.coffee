@@ -32,7 +32,7 @@ class CustomerCtrl
               if res.error is 1
                cb new Error(res.errMsg)
               else
-                cb res.data
+                cb null,res.data
             catch error
               cb new Error("Parse Error")
       ,update:["customerInfo",(cb,results) ->
