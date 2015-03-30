@@ -143,6 +143,7 @@
           break;
         case "LOCATION":
           return CustomerCtrl.updateLocation(msgObj.xml.FromUserName[0], msgObj.xml.Latitude[0], msgObj.xml.Longitude[0], function(err, res) {
+            console.log("LOCATION", err, res);
             return fn(err, '');
           });
         case "SCAN":
