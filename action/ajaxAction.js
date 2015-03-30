@@ -92,17 +92,7 @@
   };
 
   exports.couponList = function(req, res) {
-    return CouponCtrl.list(req.session.member.ent._id, function(err, results) {
-      console.log(err, results);
-      if (results.data != null) {
-        return res.render("./page/couponList", {
-          coupons: results.data,
-          types: ["金额券", "折扣券", "产品固定价格", "免费券"]
-        });
-      } else {
-        return res.status(500).end();
-      }
-    });
+    return res.render("./page/couponList");
   };
 
   exports.couponAjaxList = function(req, res) {

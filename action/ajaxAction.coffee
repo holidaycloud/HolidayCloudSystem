@@ -53,12 +53,13 @@ exports.members = (req,res) ->
       res.status(500).end()
 
 exports.couponList = (req,res) ->
-  CouponCtrl.list req.session.member.ent._id,(err,results) ->
-    console.log err,results
-    if results.data?
-      res.render "./page/couponList",coupons:results.data,types:[ "金额券","折扣券","产品固定价格","免费券"]
-    else
-      res.status(500).end()
+  res.render "./page/couponList"
+#  CouponCtrl.list req.session.member.ent._id,(err,results) ->
+#    console.log err,results
+#    if results.data?
+#      res.render "./page/couponList",coupons:results.data,types:[ "金额券","折扣券","产品固定价格","免费券"]
+#    else
+#      res.status(500).end()
 
 exports.couponAjaxList = (req,res) ->
   orderArr = ["code","ent","name","type","value","minValue","status","startDate"]
