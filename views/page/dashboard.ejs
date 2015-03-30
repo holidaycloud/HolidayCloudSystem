@@ -79,19 +79,28 @@
 <script>
     $(function () {
         (function(){
-            var map = new BMap.Map('map_canvas');
-            map.addControl(new BMap.NavigationControl());
+            var map = new qq.maps.Map("map_canvas");
+            var info = new qq.maps.InfoWindow({
+                map: map
+            });
             var locations = [];
             <%locations.forEach(function(l){%>
             locations.push(<%-JSON.stringify(l)%>);
             <%})%>
             for(var i in locations){
-                var point = new BMap.Point(locations[i].location.lon,locations[i].location.lat);
-                var marker = new BMap.Marker(point);
-                var label = new BMap.Label(locations[i].loginName);
-                marker.setLabel(label);
-                map.addOverlay(marker);
-                map.centerAndZoom(point, 15);
+                var point = new qq.maps.LatLng(locations[i].location.lat,locations[i].location.lon);
+                var marker = new qq.maps.Marker({
+                    position: point,
+                    map: map
+                });
+                qq.maps.event.addListener(marker, 'click', function() {
+                    info.open();
+                    info.setContent('<div style="text-align:center;white-space:nowrap;'+
+                    'margin:10px;">'+locations[i].loginName+'</div>');
+                    info.setPosition(point);
+                });
+                map.setCenter(point);
+                map.zoomTo(15);
             }
         })()
 
