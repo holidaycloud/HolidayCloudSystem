@@ -107,6 +107,9 @@
           }
         ]
       }, function(err, results) {
+        console.log("----------------------------");
+        console.log(err, results);
+        console.log("----------------------------");
         return fn(err, results.update);
       });
     };

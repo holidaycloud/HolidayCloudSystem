@@ -71,9 +71,7 @@ class WeixinCtrl
           CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
             fn err,res
       when "LOCATION"
-        console.log "start save location",msgObj.xml.FromUserName[0],msgObj.xml.Latitude[0],msgObj.xml.Longitude[0]
         CustomerCtrl.updateLocation msgObj.xml.FromUserName[0],msgObj.xml.Latitude[0],msgObj.xml.Longitude[0],(err,res) ->
-          console.log "LOCATION",err,res
           fn err,''
       when "SCAN" then CustomerCtrl.weixinCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
         if err
