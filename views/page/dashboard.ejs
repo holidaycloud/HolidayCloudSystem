@@ -90,15 +90,7 @@
                     position: point,
                     map: map
                 });
-                var info = new qq.maps.InfoWindow({
-                    map: map
-                });
-                qq.maps.event.addListener(marker, 'click', function() {
-                    info.open();
-                    info.setContent('<div style="text-align:center;white-space:nowrap;'+
-                    'margin:10px;">'+locations[i].loginName+'</div>');
-                    info.setPosition(point);
-                });
+                marker.setTitle(locations[i].loginName);
                 map.setCenter(point);
                 map.zoomTo(15);
             }
