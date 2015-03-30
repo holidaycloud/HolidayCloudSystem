@@ -112,5 +112,4 @@ class WeixinCtrl
 
   @text:(msgObj,fn) ->
     fn null,""
-
 module.exports = WeixinCtrl

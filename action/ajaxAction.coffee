@@ -86,4 +86,3 @@ exports.couponAjaxList = (req,res) ->
       c.startDate = "#{new Date(c.startDate).Format("yyyy-MM-dd")}至#{new Date(c.endDate).Format("yyyy-MM-dd")}"
       delete c.endDate
     res.json draw:draw,recordsTotal:results.data.totalSize,recordsFiltered:results.data.totalSize,data:coupons
-
