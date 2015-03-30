@@ -55,6 +55,7 @@
             method: "GET"
           }, function(err, response, body) {
             var error, res;
+            console.log("customerInfo", err, body);
             if (err) {
               return cb(err);
             } else {
@@ -76,34 +77,38 @@
           "customerInfo", function(cb, results) {
             var customer, url;
             customer = results.customerInfo;
-            url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/updateLocation";
-            return request({
-              url: url,
-              timeout: 3000,
-              method: "POST",
-              form: {
-                id: customer._id,
-                lat: lat,
-                lon: lon
-              }
-            }, function(err, response, body) {
-              var error, res;
-              if (err) {
-                return cb(err);
-              } else {
-                try {
-                  res = JSON.parse(body);
-                  if ((res.error != null) === 1) {
-                    return cb(new Error(res.errMsg));
-                  } else {
-                    return cb(null, res.data);
-                  }
-                } catch (_error) {
-                  error = _error;
-                  return cb(new Error("Parse Error"));
+            if (customer) {
+              url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/updateLocation";
+              return request({
+                url: url,
+                timeout: 3000,
+                method: "POST",
+                form: {
+                  id: customer._id,
+                  lat: lat,
+                  lon: lon
                 }
-              }
-            });
+              }, function(err, response, body) {
+                var error, res;
+                if (err) {
+                  return cb(err);
+                } else {
+                  try {
+                    res = JSON.parse(body);
+                    if ((res.error != null) === 1) {
+                      return cb(new Error(res.errMsg));
+                    } else {
+                      return cb(null, res.data);
+                    }
+                  } catch (_error) {
+                    error = _error;
+                    return cb(new Error("Parse Error"));
+                  }
+                }
+              });
+            } else {
+              return cb(null, null);
+            }
           }
         ]
       }, function(err, results) {

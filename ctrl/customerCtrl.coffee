@@ -24,6 +24,7 @@ class CustomerCtrl
       customerInfo:(cb) ->
         url = "#{config.inf.host}:#{config.inf.port}/api/customer/weixinLogin?ent=#{global.weixinEnt}&openId=#{openid}"
         request {url,timeout:3000,method:"GET"},(err,response,body) ->
+          console.log "customerInfo",err,body
           if err
             cb err
           else
@@ -37,19 +38,23 @@ class CustomerCtrl
               cb new Error("Parse Error")
       ,update:["customerInfo",(cb,results) ->
         customer = results.customerInfo
-        url = "#{config.inf.host}:#{config.inf.port}/api/customer/updateLocation"
-        request {url,timeout:3000,method:"POST",form:{id:customer._id,lat,lon}},(err,response,body) ->
-          if err
-            cb err
-          else
-            try
-              res = JSON.parse(body)
-              if res.error? is 1
-                cb new Error(res.errMsg)
-              else
-                cb null,res.data
-            catch error
-              cb new Error("Parse Error")
+
+        if customer
+          url = "#{config.inf.host}:#{config.inf.port}/api/customer/updateLocation"
+          request {url,timeout:3000,method:"POST",form:{id:customer._id,lat,lon}},(err,response,body) ->
+            if err
+              cb err
+            else
+              try
+                res = JSON.parse(body)
+                if res.error? is 1
+                  cb new Error(res.errMsg)
+                else
+                  cb null,res.data
+              catch error
+                cb new Error("Parse Error")
+        else
+          cb null,null
       ]
     },(err,results) ->
       fn err,results.update
