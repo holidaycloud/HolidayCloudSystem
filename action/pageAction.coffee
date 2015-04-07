@@ -191,3 +191,6 @@ exports.couponuse = (req,res) ->
       )
   else
     res.render "useResult",{result:false,message:"请使用微信扫一扫"}
+
+exports.map = (req,res) ->
+  res.render "map"

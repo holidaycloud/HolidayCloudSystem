@@ -108,9 +108,8 @@
   };
 
   exports.couponAjaxList = function(req, res) {
-    var dir, draw, length, order, orderArr, search, start, statusArr, types;
-    orderArr = ["code", "ent", "name", "type", "value", "minValue", "status", "startDate"];
-    types = ["金额券", "折扣券", "定价券", "免费券"];
+    var dir, draw, length, order, orderArr, search, start, statusArr;
+    orderArr = ["code", "ent", "name", "status", "customer", "useTime", "startDate"];
     statusArr = ["未使用", "已使用"];
     draw = req.body.draw;
     start = req.body.start;
@@ -123,8 +122,10 @@
       coupons = results.data.coupons;
       for (_i = 0, _len = coupons.length; _i < _len; _i++) {
         c = coupons[_i];
-        c.type = types[c.type];
         c.status = statusArr[c.status];
+        c.useTime = c.useTime != null ? new Date(c.useTime).Format("yyyy-MM-dd hh:mm:ss") : "";
+        c.customer = (c.customer != null) && (c.customer.loginName != null) ? c.customer.loginName : "未领取";
+        console.log(c.customer);
         c.startDate = "" + (new Date(c.startDate).Format("yyyy-MM-dd")) + "至" + (new Date(c.endDate).Format("yyyy-MM-dd"));
         delete c.endDate;
       }

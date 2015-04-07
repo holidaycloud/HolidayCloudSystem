@@ -69,8 +69,8 @@ exports.couponList = (req,res) ->
 #      res.status(500).end()
 
 exports.couponAjaxList = (req,res) ->
-  orderArr = ["code","ent","name","type","value","minValue","status","startDate"]
-  types = ["金额券","折扣券","定价券","免费券"]
+  orderArr = ["code","ent","name","status","customer","useTime","startDate"]
+#  types = ["金额券","折扣券","定价券","免费券"]
   statusArr = ["未使用","已使用"]
   draw = req.body.draw
   start = req.body.start
@@ -81,8 +81,11 @@ exports.couponAjaxList = (req,res) ->
   CouponCtrl.ajaxList req.session.member.ent._id,start,length,order,dir,search,(err,results) ->
     coupons = results.data.coupons
     for c in coupons
-      c.type = types[c.type]
+#      c.type = types[c.type]
       c.status = statusArr[c.status]
+      c.useTime =  if c.useTime? then new Date(c.useTime).Format("yyyy-MM-dd hh:mm:ss") else ""
+      c.customer = if c.customer? and c.customer.loginName? then c.customer.loginName else "未领取"
+      console.log c.customer
       c.startDate = "#{new Date(c.startDate).Format("yyyy-MM-dd")}至#{new Date(c.endDate).Format("yyyy-MM-dd")}"
       delete c.endDate
     res.json draw:draw,recordsTotal:results.data.totalSize,recordsFiltered:results.data.totalSize,data:coupons

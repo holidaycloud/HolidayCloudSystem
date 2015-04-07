@@ -31,6 +31,8 @@
 
   router.get("/couponuse", PageAction.couponuse);
 
+  router.get("/map", PageAction.map);
+
   module.exports = router;
 
 }).call(this);

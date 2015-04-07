@@ -15,4 +15,5 @@ router.get "/dologout",Action.dologout
 router.get "/coupons",PageAction.coupons
 router.get "/couponDetail",PageAction.couponDetail
 router.get "/couponuse",PageAction.couponuse
+router.get "/map",PageAction.map
 module.exports = router
