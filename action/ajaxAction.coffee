@@ -85,7 +85,6 @@ exports.couponAjaxList = (req,res) ->
       c.status = statusArr[c.status]
       c.useTime =  if c.useTime? then new Date(c.useTime).Format("yyyy-MM-dd hh:mm:ss") else ""
       c.customer = if c.customer? and c.customer.loginName? then c.customer.loginName else "未领取"
-      console.log c.customer
       c.startDate = "#{new Date(c.startDate).Format("yyyy-MM-dd")}至#{new Date(c.endDate).Format("yyyy-MM-dd")}"
       delete c.endDate
     res.json draw:draw,recordsTotal:results.data.totalSize,recordsFiltered:results.data.totalSize,data:coupons

@@ -125,7 +125,6 @@
         c.status = statusArr[c.status];
         c.useTime = c.useTime != null ? new Date(c.useTime).Format("yyyy-MM-dd hh:mm:ss") : "";
         c.customer = (c.customer != null) && (c.customer.loginName != null) ? c.customer.loginName : "未领取";
-        console.log(c.customer);
         c.startDate = "" + (new Date(c.startDate).Format("yyyy-MM-dd")) + "至" + (new Date(c.endDate).Format("yyyy-MM-dd"));
         delete c.endDate;
       }
