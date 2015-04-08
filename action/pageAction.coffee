@@ -34,6 +34,7 @@ exports.bind = (req,res) ->
         cb err,results
   ]
   ,(err,results) ->
+    console.log err,results
     res.render "weixinBind",weixin:results[1].data,openid:results[0].data?.openid
 
 ###

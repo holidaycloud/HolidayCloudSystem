@@ -57,6 +57,7 @@
       }
     ], function(err, results) {
       var _ref;
+      console.log(err, results);
       return res.render("weixinBind", {
         weixin: results[1].data,
         openid: (_ref = results[0].data) != null ? _ref.openid : void 0
