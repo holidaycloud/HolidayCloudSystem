@@ -61,6 +61,7 @@
     } else {
       return draw(text, scale, function(err, canvas) {
         var out, stream;
+        console.log(canvas);
         out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
         stream = canvas.pngStream();
         stream.pipe(out, {

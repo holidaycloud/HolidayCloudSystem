@@ -32,6 +32,7 @@ exports.toPngFile = (text,logo,scale=1,callback) ->
         callback null,text
   else
     draw text,scale,(err,canvas) ->
+      console.log canvas
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
       stream = canvas.pngStream()
       stream.pipe out,end:false
