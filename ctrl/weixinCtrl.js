@@ -20,7 +20,7 @@
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/jsapisign/" + ent;
       return request({
         url: url,
-        timeout: 3000,
+        timeout: 8000,
         method: "POST",
         form: {
           url: posturl
@@ -50,7 +50,7 @@
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/codeAccesstoken/" + ent + "?code=" + code;
       return request({
         url: url,
-        timeout: 3000,
+        timeout: 8000,
         method: "GET"
       }, function(err, response, body) {
         var error, res;

@@ -6,7 +6,7 @@ CouponCtrl = require "./couponCtrl"
 class WeixinCtrl
   @jsapiSign:(ent,posturl,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/jsapisign/#{ent}"
-    request {url,timeout:3000,method:"POST",form:{url:posturl}},(err,response,body) ->
+    request {url,timeout:8000,method:"POST",form:{url:posturl}},(err,response,body) ->
       if err
         fn err
       else
@@ -21,7 +21,7 @@ class WeixinCtrl
 
   @getOpenid:(ent,code,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/codeAccesstoken/#{ent}?code=#{code}"
-    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+    request {url,timeout:8000,method:"GET"},(err,response,body) ->
       if err
         fn err
       else
