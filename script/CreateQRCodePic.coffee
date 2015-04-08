@@ -3,7 +3,7 @@ QRCodeExtend = require "./../tools/qrcodeExtend"
 async = require "async"
 createFun = (text) ->
   (cb) ->
-    QRCodeExtend.toPngFile text,6,(err,res) ->
+    QRCodeExtend.toPngFile text,2,(err,res) ->
       cb err,res
 
 CouponCtrl.marketingList "550f7c079270a9154dfbdc1f",(err,res) ->

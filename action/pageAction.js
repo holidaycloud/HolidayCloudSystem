@@ -190,7 +190,7 @@
     scala = 3;
     logoSize = 0.2;
     deferred = Q.defer();
-    QRCodeExtend.toDataUrl(id, 8, function(err, results) {
+    QRCodeExtend.toDataUrl(id, 2, function(err, results) {
       if (err != null) {
         deferred.reject(err);
       }

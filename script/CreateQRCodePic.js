@@ -10,7 +10,7 @@
 
   createFun = function(text) {
     return function(cb) {
-      return QRCodeExtend.toPngFile(text, 6, function(err, res) {
+      return QRCodeExtend.toPngFile(text, 2, function(err, res) {
         return cb(err, res);
       });
     };
