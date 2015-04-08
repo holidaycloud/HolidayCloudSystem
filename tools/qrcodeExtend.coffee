@@ -23,8 +23,10 @@ draw = (text,scale,callback) ->
     callback err,canvas
 
 exports.toPngFile = (text,logo,scale=1,callback) ->
+  console.log text,logo,scale
   if logo?
     drawWithLogo text,logo,scale,(err,canvas) ->
+      console.log err,canvas
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
       stream = canvas.pngStream()
       stream.pipe out,end:false
@@ -32,7 +34,7 @@ exports.toPngFile = (text,logo,scale=1,callback) ->
         callback null,text
   else
     draw text,scale,(err,canvas) ->
-      console.log canvas
+      console.log err,canvas
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
       stream = canvas.pngStream()
       stream.pipe out,end:false

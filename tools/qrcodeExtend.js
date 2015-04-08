@@ -46,9 +46,11 @@
     if (scale == null) {
       scale = 1;
     }
+    console.log(text, logo, scale);
     if (logo != null) {
       return drawWithLogo(text, logo, scale, function(err, canvas) {
         var out, stream;
+        console.log(err, canvas);
         out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
         stream = canvas.pngStream();
         stream.pipe(out, {
@@ -61,7 +63,7 @@
     } else {
       return draw(text, scale, function(err, canvas) {
         var out, stream;
-        console.log(canvas);
+        console.log(err, canvas);
         out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
         stream = canvas.pngStream();
         stream.pipe(out, {
