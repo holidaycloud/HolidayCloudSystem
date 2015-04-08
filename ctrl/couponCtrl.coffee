@@ -37,6 +37,21 @@ class CouponCtrl
         catch error
           fn new Error("Parse Error")
 
+  @marketingList:(marketing,fn) ->
+    url = "#{config.inf.host}:#{config.inf.port}/api/coupon/marketList?marketing=#{marketing}"
+    request {url,method:"GET"},(err,response,body) ->
+      if err
+        fn err
+      else
+        try
+          res = JSON.parse(body)
+          if res.error? is 1
+            fn new Error(res.errMsg)
+          else
+            fn null,res
+        catch error
+          fn new Error("Parse Error")
+
   @list:(ent,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/fulllist?ent=#{ent}"
     request {url,method:"GET"},(err,response,body) ->
@@ -66,6 +81,7 @@ class CouponCtrl
             fn null,res
         catch error
           fn new Error("Parse Error")
+
   @detail:(id,fn) ->
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/detail?id=#{id}"
     request {url,timeout:3000,method:"GET"},(err,response,body) ->

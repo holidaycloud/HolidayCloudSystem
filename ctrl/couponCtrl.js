@@ -68,6 +68,32 @@
       });
     };
 
+    CouponCtrl.marketingList = function(marketing, fn) {
+      var url;
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/marketList?marketing=" + marketing;
+      return request({
+        url: url,
+        method: "GET"
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return fn(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return fn(new Error(res.errMsg));
+            } else {
+              return fn(null, res);
+            }
+          } catch (_error) {
+            error = _error;
+            return fn(new Error("Parse Error"));
+          }
+        }
+      });
+    };
+
     CouponCtrl.list = function(ent, fn) {
       var url;
       url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/fulllist?ent=" + ent;
