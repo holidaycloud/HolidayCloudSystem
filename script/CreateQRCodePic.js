@@ -10,7 +10,7 @@
 
   createFun = function(text) {
     return function(cb) {
-      return QRCodeExtend.toPngFile(coupon._id, null, 3, function(err, res) {
+      return QRCodeExtend.toPngFile(text, null, 3, function(err, res) {
         return cb(err, res);
       });
     };
@@ -18,7 +18,6 @@
 
   CouponCtrl.marketingList("550f7c079270a9154dfbdc1f", function(err, res) {
     var coupon, data, funcArr, _i, _len;
-    console.log(err, res);
     data = res.data;
     funcArr = [];
     for (_i = 0, _len = data.length; _i < _len; _i++) {
