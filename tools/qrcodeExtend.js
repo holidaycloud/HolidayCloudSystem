@@ -57,6 +57,7 @@
           end: false
         });
         return stream.on("end", function() {
+          out.end();
           return callback(null, text);
         });
       });
@@ -70,6 +71,7 @@
           end: false
         });
         return stream.on("end", function() {
+          out.end();
           return callback(null, text);
         });
       });

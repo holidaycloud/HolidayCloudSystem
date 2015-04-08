@@ -31,6 +31,7 @@ exports.toPngFile = (text,logo,scale=1,callback) ->
       stream = canvas.pngStream()
       stream.pipe out,end:false
       stream.on "end",() ->
+        out.end()
         callback null,text
   else
     draw text,scale,(err,canvas) ->
@@ -39,6 +40,7 @@ exports.toPngFile = (text,logo,scale=1,callback) ->
       stream = canvas.pngStream()
       stream.pipe out,end:false
       stream.on "end",() ->
+        out.end()
         callback null,text
 
 
