@@ -22,7 +22,7 @@
     console.log(data.length);
     coupon = data[0];
     console.log(coupon);
-    return QRCodeExtend.toPngFile(coupon._id, 3, function(e, r) {
+    return QRCodeExtend.toPngFile(coupon._id.toString(), 3, function(e, r) {
       return console.log(e, r);
     });
   });
