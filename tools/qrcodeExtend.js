@@ -12,12 +12,12 @@
 
   logoSize = 0.23;
 
-  exports.toPngFile = function(text, scala, callback) {
-    if (scala == null) {
-      scala = 1;
+  exports.toPngFile = function(text, scale, callback) {
+    if (scale == null) {
+      scale = 1;
     }
     return QRCode.draw(text, {
-      scala: 4 * scala
+      scale: 4 * scale
     }, function(error, canvas) {
       var out, stream;
       out = fs.createWriteStream("./image/" + text + ".png");
@@ -32,12 +32,12 @@
     });
   };
 
-  exports.withLogoToDataURL = function(text, logo, scala, callback) {
-    if (scala == null) {
-      scala = 1;
+  exports.withLogoToDataURL = function(text, logo, scale, callback) {
+    if (scale == null) {
+      scale = 1;
     }
     return QRCode.draw(text, {
-      scala: 4 * scala
+      scale: 4 * scale
     }, function(error, canvas) {
       return fs.readFile(logo, function(err, squid) {
         var ctx, h, img, w, x, y;
@@ -57,12 +57,12 @@
     });
   };
 
-  exports.toDataUrl = function(text, scala, callback) {
-    if (scala == null) {
-      scala = 1;
+  exports.toDataUrl = function(text, scale, callback) {
+    if (scale == null) {
+      scale = 1;
     }
     return QRCode.draw(text, {
-      scala: 4 * scala
+      scale: 4 * scale
     }, function(error, canvas) {
       return callback(null, canvas.toDataURL());
     });

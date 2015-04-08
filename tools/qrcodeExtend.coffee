@@ -4,8 +4,8 @@ fs = require "fs"
 Image = Canvas.Image
 logoSize = 0.23
 
-exports.toPngFile = (text,scala=1,callback) ->
-  QRCode.draw text,scala:4*scala,(error,canvas) ->
+exports.toPngFile = (text,scale=1,callback) ->
+  QRCode.draw text,scale:4*scale,(error,canvas) ->
     out = fs.createWriteStream "./image/#{text}.png"
     stream = canvas.pngStream()
     stream.pipe out,end:false
@@ -13,8 +13,8 @@ exports.toPngFile = (text,scala=1,callback) ->
       out.end()
       callback null,text
 
-exports.withLogoToDataURL = (text,logo,scala=1,callback) ->
-  QRCode.draw text,scala:4*scala,(error,canvas) ->
+exports.withLogoToDataURL = (text,logo,scale=1,callback) ->
+  QRCode.draw text,scale:4*scale,(error,canvas) ->
     fs.readFile logo,(err,squid) ->
       callback err if err?
       img = new Image
@@ -27,6 +27,6 @@ exports.withLogoToDataURL = (text,logo,scala=1,callback) ->
       ctx.drawImage img,x,y,w,h
       callback null,canvas.toDataURL()
 
-exports.toDataUrl = (text,scala=1,callback) ->
-  QRCode.draw text,scala:4*scala,(error,canvas) ->
+exports.toDataUrl = (text,scale=1,callback) ->
+  QRCode.draw text,scale:4*scale,(error,canvas) ->
     callback null,canvas.toDataURL()
