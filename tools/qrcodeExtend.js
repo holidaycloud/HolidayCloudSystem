@@ -20,8 +20,7 @@
       scala: 4 * scala
     }, function(error, canvas) {
       var out, stream;
-      console.log("" + __dirname + "/" + text + ".png");
-      out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
+      out = fs.createWriteStream("./image/" + text + ".png");
       stream = canvas.pngStream();
       stream.pipe(out, {
         end: false
