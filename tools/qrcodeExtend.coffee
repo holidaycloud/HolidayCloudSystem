@@ -12,7 +12,7 @@ exports.toPngFile = (text,scala=1,callback) ->
     stream.pipe out,end:false
     stream.on "end",() ->
       out.end()
-    callback null,text
+      callback null,text
 
 exports.withLogoToDataURL = (text,logo,scala=1,callback) ->
   QRCode.draw text,scala:4*scala,(error,canvas) ->

@@ -26,10 +26,10 @@
       stream.pipe(out, {
         end: false
       });
-      stream.on("end", function() {
-        return out.end();
+      return stream.on("end", function() {
+        out.end();
+        return callback(null, text);
       });
-      return callback(null, text);
     });
   };
 
