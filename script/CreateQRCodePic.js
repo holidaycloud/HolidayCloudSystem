@@ -24,6 +24,7 @@
       coupon = res[_i];
       funcArr.push(createFun(coupon._id));
     }
+    console.log(funcArr.length, funcArr);
     return async.parallel(funcArr, function(err, results) {
       return console.log(err, results);
     });
