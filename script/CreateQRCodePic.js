@@ -17,7 +17,9 @@
   };
 
   CouponCtrl.marketingList("550f7c079270a9154dfbdc1f", function(err, res) {
-    return console.log(err, res);
+    var data;
+    data = res.data;
+    return console.log(data.length);
   });
 
 }).call(this);

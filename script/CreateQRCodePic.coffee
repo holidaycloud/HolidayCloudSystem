@@ -8,8 +8,8 @@ createFun = (text) ->
       cb err,res
 
 CouponCtrl.marketingList "550f7c079270a9154dfbdc1f",(err,res) ->
-  console.log err,res
-#  data = res.data
+  data = res.data
+  console.log data.length
 #  QRCodeExtend.toPngFile data[0]._id,3,(err,res) ->
 #    console.log err,res
 #  funcArr = []
