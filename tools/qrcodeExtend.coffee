@@ -4,8 +4,8 @@ fs = require "fs"
 Image = Canvas.Image
 logoSize = 0.23
 
-exports.toPngFile = (text,scale=1,callback) ->
-  console.log text,scale
+exports.toPngFile = (text,scala=1,callback) ->
+  console.log text,scala
   QRCode.draw text,scala:4*scala,(error,canvas) ->
     out = fs.createWriteStream "#{__dirname}/#{text}.png"
     stream = canvas.pngStream()

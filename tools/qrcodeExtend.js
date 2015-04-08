@@ -12,11 +12,11 @@
 
   logoSize = 0.23;
 
-  exports.toPngFile = function(text, scale, callback) {
-    if (scale == null) {
-      scale = 1;
+  exports.toPngFile = function(text, scala, callback) {
+    if (scala == null) {
+      scala = 1;
     }
-    console.log(text, scale);
+    console.log(text, scala);
     return QRCode.draw(text, {
       scala: 4 * scala
     }, function(error, canvas) {
