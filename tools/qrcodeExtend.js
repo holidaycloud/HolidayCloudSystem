@@ -29,7 +29,7 @@
         x = (canvas.width / 2) - (w / 2);
         y = (canvas.height / 2) - (h / 2);
         ctx.drawImage(img, x, y, w, h);
-        return callback(err, canvas);
+        return callback(error, canvas);
       });
     });
   };
@@ -38,7 +38,7 @@
     return QRCode.draw(text, {
       scala: 4 * scala
     }, function(error, canvas) {
-      return callback(err, canvas);
+      return callback(error, canvas);
     });
   };
 

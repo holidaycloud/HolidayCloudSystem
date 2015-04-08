@@ -16,11 +16,11 @@ drawWithLogo = (text,logo,scale,callback) ->
       x = (canvas.width/2) - (w/2)
       y = (canvas.height/2) - (h/2)
       ctx.drawImage img,x,y,w,h
-      callback err,canvas
+      callback error,canvas
 
 draw = (text,scale,callback) ->
   QRCode.draw text,scala:4*scala,(error,canvas) ->
-    callback err,canvas
+    callback error,canvas
 
 exports.toPngFile = (text,logo,scale=1,callback) ->
   console.log text,logo,scale
