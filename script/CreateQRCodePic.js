@@ -18,13 +18,14 @@
 
   CouponCtrl.marketingList("550f7c079270a9154dfbdc1f", function(err, res) {
     var coupon, data, funcArr, _i, _len;
+    console.log(err, res);
     data = res.data;
     funcArr = [];
     for (_i = 0, _len = data.length; _i < _len; _i++) {
       coupon = data[_i];
       funcArr.push(createFun(coupon._id));
     }
-    console.log(funcArr.length, funcArr);
+    console.log(funcArr.length);
     return async.parallel(funcArr, function(err, results) {
       return console.log(err, results);
     });
