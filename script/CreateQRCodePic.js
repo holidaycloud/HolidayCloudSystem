@@ -10,7 +10,7 @@
 
   createFun = function(text) {
     return function(cb) {
-      return QRCodeExtend.toPngFile(text, null, 3, function(err, res) {
+      return QRCodeExtend.toPngFile(text, 6, function(err, res) {
         return cb(err, res);
       });
     };
@@ -22,7 +22,6 @@
     funcArr = [];
     for (_i = 0, _len = data.length; _i < _len; _i++) {
       coupon = data[_i];
-      console.log(coupon);
       funcArr.push(createFun(coupon._id));
     }
     return async.parallel(funcArr, function(err, results) {
