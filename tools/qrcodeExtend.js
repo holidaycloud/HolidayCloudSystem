@@ -26,8 +26,9 @@
       stream.pipe(out, {
         end: false
       });
-      stream.on("end", function() {});
-      out.end();
+      stream.on("end", function() {
+        return out.end();
+      });
       return callback(null, text);
     });
   };

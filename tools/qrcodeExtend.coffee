@@ -11,7 +11,7 @@ exports.toPngFile = (text,scala=1,callback) ->
     stream = canvas.pngStream()
     stream.pipe out,end:false
     stream.on "end",() ->
-    out.end()
+      out.end()
     callback null,text
 
 exports.withLogoToDataURL = (text,logo,scala=1,callback) ->
