@@ -1,9 +1,16 @@
 CouponCtrl = require "./../ctrl/couponCtrl"
 QRCodeExtend = require "./../tools/qrcodeExtend"
+async = require "async"
+
+createFun = (text) ->
+  (cb) ->
+    QRCodeExtend.toPngFile coupon._id,null,3,(err,res) ->
+      cb err,res
 
 CouponCtrl.marketingList "550f7c079270a9154dfbdc1f",(err,res) ->
   data = res.data
-  for coupon in res
-    console.log coupon._id
-    QRCodeExtend.toPngFile coupon._id,null,3
+  funcArr = for coupon in res
+    createFun coupon._id
+  async.parallel funcArr,(err,results) ->
+    console.log err,results
 

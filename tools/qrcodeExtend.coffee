@@ -22,17 +22,21 @@ draw = (text,scale,callback) ->
   QRCode.draw text,scala:4*scala,(error,canvas) ->
     callback err,canvas
 
-exports.toPngFile = (text,logo,scale=1) ->
+exports.toPngFile = (text,logo,scale=1,callback) ->
   if logo?
     drawWithLogo text,logo,scale,(err,canvas) ->
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
       stream = canvas.pngStream()
-      stream.pipe out
+      stream.pipe out,end:false
+      stream.on "end",() ->
+        callback null,text
   else
     draw text,scale,(err,canvas) ->
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
       stream = canvas.pngStream()
-      stream.pipe out
+      stream.pipe out,end:false
+      stream.on "end",() ->
+        callback null,text
 
 
 exports.withLogoToDataURL = (text,logo,scala=1,callback) ->

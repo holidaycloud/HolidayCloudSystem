@@ -42,7 +42,7 @@
     });
   };
 
-  exports.toPngFile = function(text, logo, scale) {
+  exports.toPngFile = function(text, logo, scale, callback) {
     if (scale == null) {
       scale = 1;
     }
@@ -51,14 +51,24 @@
         var out, stream;
         out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
         stream = canvas.pngStream();
-        return stream.pipe(out);
+        stream.pipe(out, {
+          end: false
+        });
+        return stream.on("end", function() {
+          return callback(null, text);
+        });
       });
     } else {
       return draw(text, scale, function(err, canvas) {
         var out, stream;
         out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
         stream = canvas.pngStream();
-        return stream.pipe(out);
+        stream.pipe(out, {
+          end: false
+        });
+        return stream.on("end", function() {
+          return callback(null, text);
+        });
       });
     }
   };
