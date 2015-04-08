@@ -35,6 +35,7 @@
   };
 
   draw = function(text, scale, callback) {
+    console.log("start draw", text, scale, callback);
     return QRCode.draw(text, {
       scala: 4 * scala
     }, function(error, canvas) {
@@ -48,6 +49,7 @@
     }
     console.log(text, logo, scale);
     if (logo != null) {
+      console.log("---logo---");
       return drawWithLogo(text, logo, scale, function(err, canvas) {
         var out, stream;
         console.log(err, canvas);
@@ -62,6 +64,7 @@
         });
       });
     } else {
+      console.log("---no logo---");
       return draw(text, scale, function(err, canvas) {
         var out, stream;
         console.log(err, canvas);

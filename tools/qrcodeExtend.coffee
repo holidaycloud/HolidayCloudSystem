@@ -19,12 +19,14 @@ drawWithLogo = (text,logo,scale,callback) ->
       callback error,canvas
 
 draw = (text,scale,callback) ->
+  console.log "start draw",text,scale,callback
   QRCode.draw text,scala:4*scala,(error,canvas) ->
     callback error,canvas
 
 exports.toPngFile = (text,logo,scale=1,callback) ->
   console.log text,logo,scale
   if logo?
+    console.log "---logo---"
     drawWithLogo text,logo,scale,(err,canvas) ->
       console.log err,canvas
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
@@ -34,6 +36,7 @@ exports.toPngFile = (text,logo,scale=1,callback) ->
         out.end()
         callback null,text
   else
+    console.log "---no logo---"
     draw text,scale,(err,canvas) ->
       console.log err,canvas
       out = fs.createWriteStream "#{__dirname}/#{text}.png"
