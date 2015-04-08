@@ -16,11 +16,11 @@
     if (scala == null) {
       scala = 1;
     }
-    console.log(text, scala);
     return QRCode.draw(text, {
       scala: 4 * scala
     }, function(error, canvas) {
       var out, stream;
+      console.log("" + __dirname + "/" + text + ".png");
       out = fs.createWriteStream("" + __dirname + "/" + text + ".png");
       stream = canvas.pngStream();
       stream.pipe(out, {
