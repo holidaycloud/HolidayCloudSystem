@@ -20,8 +20,8 @@
     var coupon, data, funcArr, _i, _len;
     data = res.data;
     funcArr = [];
-    for (_i = 0, _len = res.length; _i < _len; _i++) {
-      coupon = res[_i];
+    for (_i = 0, _len = data.length; _i < _len; _i++) {
+      coupon = data[_i];
       funcArr.push(createFun(coupon._id));
     }
     console.log(funcArr.length, funcArr);

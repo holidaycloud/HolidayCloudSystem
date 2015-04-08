@@ -10,7 +10,7 @@ createFun = (text) ->
 CouponCtrl.marketingList "550f7c079270a9154dfbdc1f",(err,res) ->
   data = res.data
   funcArr = []
-  for coupon in res
+  for coupon in data
     funcArr.push createFun coupon._id
   console.log funcArr.length,funcArr
   async.parallel funcArr,(err,results) ->
