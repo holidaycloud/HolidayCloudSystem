@@ -16,6 +16,7 @@
     if (scale == null) {
       scale = 1;
     }
+    console.log(text, scale);
     return QRCode.draw(text, {
       scala: 4 * scala
     }, function(error, canvas) {

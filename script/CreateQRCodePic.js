@@ -17,11 +17,7 @@
   };
 
   CouponCtrl.marketingList("550f7c079270a9154dfbdc1f", function(err, res) {
-    var data;
-    data = res.data;
-    return QRCodeExtend.toPngFile(data[0]._id, 3, function(err, res) {
-      return console.log(err, res);
-    });
+    return console.log(err, res);
   });
 
 }).call(this);

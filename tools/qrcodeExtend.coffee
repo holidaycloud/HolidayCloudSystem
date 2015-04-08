@@ -5,6 +5,7 @@ Image = Canvas.Image
 logoSize = 0.23
 
 exports.toPngFile = (text,scale=1,callback) ->
+  console.log text,scale
   QRCode.draw text,scala:4*scala,(error,canvas) ->
     out = fs.createWriteStream "#{__dirname}/#{text}.png"
     stream = canvas.pngStream()
