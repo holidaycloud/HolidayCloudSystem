@@ -17,17 +17,13 @@
   };
 
   CouponCtrl.marketingList("550f7c079270a9154dfbdc1f", function(err, res) {
-    var coupon, data, funcArr;
+    var coupon, data, funcArr, _i, _len;
     data = res.data;
-    funcArr = (function() {
-      var _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = res.length; _i < _len; _i++) {
-        coupon = res[_i];
-        _results.push(createFun(coupon._id));
-      }
-      return _results;
-    })();
+    funcArr = [];
+    for (_i = 0, _len = res.length; _i < _len; _i++) {
+      coupon = res[_i];
+      funcArr.push(createFun(coupon._id));
+    }
     return async.parallel(funcArr, function(err, results) {
       return console.log(err, results);
     });
