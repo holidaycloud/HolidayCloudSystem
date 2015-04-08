@@ -11,8 +11,9 @@ CouponCtrl.marketingList "550f7c079270a9154dfbdc1f",(err,res) ->
   data = res.data
   funcArr = []
   for coupon in data
+    console.log coupon
     funcArr.push createFun coupon._id
-  console.log funcArr.length
+
   async.parallel funcArr,(err,results) ->
     console.log err,results
 

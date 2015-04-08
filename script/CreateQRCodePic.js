@@ -22,9 +22,9 @@
     funcArr = [];
     for (_i = 0, _len = data.length; _i < _len; _i++) {
       coupon = data[_i];
+      console.log(coupon);
       funcArr.push(createFun(coupon._id));
     }
-    console.log(funcArr.length);
     return async.parallel(funcArr, function(err, results) {
       return console.log(err, results);
     });
