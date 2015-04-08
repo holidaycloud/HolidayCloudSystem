@@ -40,23 +40,23 @@ exports.toPngFile = (text,logo,scale=1,callback) ->
 
 
 exports.withLogoToDataURL = (text,logo,scala=1,callback) ->
-  drawWithLogo text,logo,scala,(err,canvas) ->
-    callback null,canvas.toDataURL()
-#  QRCode.draw text,scala:4*scala,(error,canvas) ->
-#    fs.readFile logo,(err,squid) ->
-#      callback err if err?
-#      img = new Image
-#      img.src = squid
-#      ctx = canvas.getContext "2d"
-#      w = canvas.width*logoSize
-#      h = canvas.height*logoSize
-#      x = (canvas.width/2) - (w/2)
-#      y = (canvas.height/2) - (h/2)
-#      ctx.drawImage img,x,y,w,h
-#      callback null,canvas.toDataURL()
+#  drawWithLogo text,logo,scala,(err,canvas) ->
+#    callback null,canvas.toDataURL()
+  QRCode.draw text,scala:4*scala,(error,canvas) ->
+    fs.readFile logo,(err,squid) ->
+      callback err if err?
+      img = new Image
+      img.src = squid
+      ctx = canvas.getContext "2d"
+      w = canvas.width*logoSize
+      h = canvas.height*logoSize
+      x = (canvas.width/2) - (w/2)
+      y = (canvas.height/2) - (h/2)
+      ctx.drawImage img,x,y,w,h
+      callback null,canvas.toDataURL()
 
 exports.toDataUrl = (text,scala=1,callback) ->
-  draw text,scala,(err,canvas) ->
-    callback null,canvas.toDataURL()
-#  QRCode.draw text,scala:4*scala,(error,canvas) ->
+#  draw text,scala,(err,canvas) ->
 #    callback null,canvas.toDataURL()
+  QRCode.draw text,scala:4*scala,(error,canvas) ->
+    callback null,canvas.toDataURL()

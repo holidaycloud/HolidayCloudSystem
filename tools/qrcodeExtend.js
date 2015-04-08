@@ -77,8 +77,24 @@
     if (scala == null) {
       scala = 1;
     }
-    return drawWithLogo(text, logo, scala, function(err, canvas) {
-      return callback(null, canvas.toDataURL());
+    return QRCode.draw(text, {
+      scala: 4 * scala
+    }, function(error, canvas) {
+      return fs.readFile(logo, function(err, squid) {
+        var ctx, h, img, w, x, y;
+        if (err != null) {
+          callback(err);
+        }
+        img = new Image;
+        img.src = squid;
+        ctx = canvas.getContext("2d");
+        w = canvas.width * logoSize;
+        h = canvas.height * logoSize;
+        x = (canvas.width / 2) - (w / 2);
+        y = (canvas.height / 2) - (h / 2);
+        ctx.drawImage(img, x, y, w, h);
+        return callback(null, canvas.toDataURL());
+      });
     });
   };
 
@@ -86,7 +102,9 @@
     if (scala == null) {
       scala = 1;
     }
-    return draw(text, scala, function(err, canvas) {
+    return QRCode.draw(text, {
+      scala: 4 * scala
+    }, function(error, canvas) {
       return callback(null, canvas.toDataURL());
     });
   };
