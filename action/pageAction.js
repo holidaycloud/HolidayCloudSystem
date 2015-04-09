@@ -75,7 +75,7 @@
     url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/codeAccesstoken/" + global.weixinEnt + "?code=" + code;
     request({
       url: url,
-      timeout: 3000,
+      timeout: 8000,
       method: "GET"
     }, function(err, response, body) {
       var error, res;
@@ -104,7 +104,7 @@
     url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.weixinEnt + "&openId=" + openid;
     request({
       url: url,
-      timeout: 3000,
+      timeout: 8000,
       method: "GET"
     }, function(err, response, body) {
       var error, res;
@@ -133,7 +133,7 @@
     url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/customerCoupons?ent=" + global.weixinEnt + "&customer=" + customer;
     request({
       url: url,
-      timeout: 3000,
+      timeout: 8000,
       method: "GET"
     }, function(err, response, body) {
       var error, res;
@@ -162,7 +162,7 @@
     url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/detail?id=" + id;
     request({
       url: url,
-      timeout: 3000,
+      timeout: 8000,
       method: "GET"
     }, function(err, response, body) {
       var error, res;
@@ -205,7 +205,7 @@
     url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/scanUse";
     request({
       url: url,
-      timeout: 3000,
+      timeout: 8000,
       method: "POST",
       form: {
         id: id
