@@ -134,30 +134,33 @@ class CouponCtrl
       ]
       ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
         coupon = results.getCoupon.data
-        customer = results.getCustomer.data
-        tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos"
-        toUser = customer.weixinOpenId
-        couponId = coupon._id
-        name = coupon.name
-        entName = coupon.ent.name
-        useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss")
-        remark = "感谢您的支持"
-        url = "#{config.weixin.host}:#{config.weixin.port}/weixin/sendCouponTemplate/#{global.weixinEnt}"
-        request {url,timeout:3000,method:"POST",form:{tempId,toUser,couponId,name,entName,useDate,remark}},(err,response,body) ->
-         if err
-           console.log err
-           cb null
-         else
-           try
-             res = JSON.parse(body)
-             if res.error? is 1
-               console.log new Error(res.errMsg)
-               cb null
-             else
-               cb null,res
-           catch error
-             console.log new Error("Parse Error")
+        customer = results.getCustomer?.data
+        if customer
+          tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos"
+          toUser = customer.weixinOpenId
+          couponId = coupon._id
+          name = coupon.name
+          entName = coupon.ent.name
+          useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss")
+          remark = "感谢您的支持"
+          url = "#{config.weixin.host}:#{config.weixin.port}/weixin/sendCouponTemplate/#{global.weixinEnt}"
+          request {url,timeout:3000,method:"POST",form:{tempId,toUser,couponId,name,entName,useDate,remark}},(err,response,body) ->
+           if err
+             console.log err
              cb null
+           else
+             try
+               res = JSON.parse(body)
+               if res.error? is 1
+                 console.log new Error(res.errMsg)
+                 cb null
+               else
+                 cb null,res
+             catch error
+               console.log new Error("Parse Error")
+               cb null
+        else
+          cb null
       ]
     },(err,results) ->
       console.log results

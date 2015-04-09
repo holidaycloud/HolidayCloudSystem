@@ -238,51 +238,55 @@
         ],
         sendTemplate: [
           "getCoupon", "couponUse", "getCustomer", function(cb, results) {
-            var coupon, couponId, customer, entName, name, remark, tempId, toUser, url, useDate;
+            var coupon, couponId, customer, entName, name, remark, tempId, toUser, url, useDate, _ref;
             coupon = results.getCoupon.data;
-            customer = results.getCustomer.data;
-            tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos";
-            toUser = customer.weixinOpenId;
-            couponId = coupon._id;
-            name = coupon.name;
-            entName = coupon.ent.name;
-            useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss");
-            remark = "感谢您的支持";
-            url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/sendCouponTemplate/" + global.weixinEnt;
-            return request({
-              url: url,
-              timeout: 3000,
-              method: "POST",
-              form: {
-                tempId: tempId,
-                toUser: toUser,
-                couponId: couponId,
-                name: name,
-                entName: entName,
-                useDate: useDate,
-                remark: remark
-              }
-            }, function(err, response, body) {
-              var error, res;
-              if (err) {
-                console.log(err);
-                return cb(null);
-              } else {
-                try {
-                  res = JSON.parse(body);
-                  if ((res.error != null) === 1) {
-                    console.log(new Error(res.errMsg));
-                    return cb(null);
-                  } else {
-                    return cb(null, res);
-                  }
-                } catch (_error) {
-                  error = _error;
-                  console.log(new Error("Parse Error"));
-                  return cb(null);
+            customer = (_ref = results.getCustomer) != null ? _ref.data : void 0;
+            if (customer) {
+              tempId = "wij1QbErYRCBnewBVFgzqh2UiHCYau3qFxexGx-0Qos";
+              toUser = customer.weixinOpenId;
+              couponId = coupon._id;
+              name = coupon.name;
+              entName = coupon.ent.name;
+              useDate = new Date(coupon.useTime).Format("yyyy-MM-dd hh:mm:ss");
+              remark = "感谢您的支持";
+              url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/sendCouponTemplate/" + global.weixinEnt;
+              return request({
+                url: url,
+                timeout: 3000,
+                method: "POST",
+                form: {
+                  tempId: tempId,
+                  toUser: toUser,
+                  couponId: couponId,
+                  name: name,
+                  entName: entName,
+                  useDate: useDate,
+                  remark: remark
                 }
-              }
-            });
+              }, function(err, response, body) {
+                var error, res;
+                if (err) {
+                  console.log(err);
+                  return cb(null);
+                } else {
+                  try {
+                    res = JSON.parse(body);
+                    if ((res.error != null) === 1) {
+                      console.log(new Error(res.errMsg));
+                      return cb(null);
+                    } else {
+                      return cb(null, res);
+                    }
+                  } catch (_error) {
+                    error = _error;
+                    console.log(new Error("Parse Error"));
+                    return cb(null);
+                  }
+                }
+              });
+            } else {
+              return cb(null);
+            }
           }
         ]
       }, function(err, results) {
