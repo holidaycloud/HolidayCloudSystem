@@ -16,7 +16,7 @@
     };
   };
 
-  CouponCtrl.marketingList("550f7c079270a9154dfbdc1f", function(err, res) {
+  CouponCtrl.marketingList("5526056f2c4236ab601027ae", function(err, res) {
     var coupon, data, funcArr, _i, _len;
     data = res.data;
     funcArr = [];
@@ -24,7 +24,7 @@
       coupon = data[_i];
       funcArr.push(createFun(coupon._id));
     }
-    return async.parallel(funcArr, function(err, results) {
+    return async.series(funcArr, function(err, results) {
       return console.log(err, results);
     });
   });

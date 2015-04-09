@@ -6,12 +6,12 @@ createFun = (text) ->
     QRCodeExtend.toPngFile text,2,(err,res) ->
       cb err,res
 
-CouponCtrl.marketingList "550f7c079270a9154dfbdc1f",(err,res) ->
+CouponCtrl.marketingList "5526056f2c4236ab601027ae",(err,res) ->
   data = res.data
   funcArr = []
   for coupon in data
     funcArr.push createFun coupon._id
 
-  async.parallel funcArr,(err,results) ->
+  async.series funcArr,(err,results) ->
     console.log err,results
 
