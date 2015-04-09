@@ -223,7 +223,7 @@
         getCoupon: [
           "couponUse", function(cb) {
             return _this.detail(id, function(err, res) {
-              return cb(err, res);
+              return cb(null, res);
             });
           }
         ],
@@ -232,7 +232,7 @@
             var coupon;
             coupon = results.getCoupon.data;
             return CustomerCtrl.detail(coupon.customer, function(err, res) {
-              return cb(err, res);
+              return cb(null, res);
             });
           }
         ],
@@ -265,18 +265,21 @@
             }, function(err, response, body) {
               var error, res;
               if (err) {
-                return fn(err);
+                console.log(err);
+                return cb(null);
               } else {
                 try {
                   res = JSON.parse(body);
                   if ((res.error != null) === 1) {
-                    return cb(new Error(res.errMsg));
+                    console.log(new Error(res.errMsg));
+                    return cb(null);
                   } else {
                     return cb(null, res);
                   }
                 } catch (_error) {
                   error = _error;
-                  return cb(new Error("Parse Error"));
+                  console.log(new Error("Parse Error"));
+                  return cb(null);
                 }
               }
             });

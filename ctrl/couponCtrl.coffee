@@ -125,12 +125,12 @@ class CouponCtrl
       ]
       ,getCoupon:["couponUse",(cb) ->
         _this.detail id,(err,res) ->
-          cb err,res
+          cb null,res
       ]
       ,getCustomer:["getCoupon",(cb,results) ->
         coupon = results.getCoupon.data
         CustomerCtrl.detail coupon.customer,(err,res) ->
-          cb err,res
+          cb null,res
       ]
       ,sendTemplate:["getCoupon","couponUse","getCustomer",(cb,results) ->
         coupon = results.getCoupon.data
@@ -145,16 +145,19 @@ class CouponCtrl
         url = "#{config.weixin.host}:#{config.weixin.port}/weixin/sendCouponTemplate/#{global.weixinEnt}"
         request {url,timeout:3000,method:"POST",form:{tempId,toUser,couponId,name,entName,useDate,remark}},(err,response,body) ->
          if err
-           fn err
+           console.log err
+           cb null
          else
            try
              res = JSON.parse(body)
              if res.error? is 1
-               cb new Error(res.errMsg)
+               console.log new Error(res.errMsg)
+               cb null
              else
                cb null,res
            catch error
-             cb new Error("Parse Error")
+             console.log new Error("Parse Error")
+             cb null
       ]
     },(err,results) ->
       console.log results
